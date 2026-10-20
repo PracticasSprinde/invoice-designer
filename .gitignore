@@ -2,15 +2,19 @@
 # Entorno virtual de Python
 .venv/
 venv/
+env/
+ENV/
 
 # Archivos temporales de Python
 __pycache__/
 *.py[cod]
+*$py.class
 
 # Variables de entorno y contraseñas
 .env
 .env.*
 !.env.example
+.envrc
 
 # Configuración local del editor
 .vscode/
@@ -18,3 +22,19 @@ __pycache__/
 # Archivos del sistema
 .DS_Store
 Thumbs.db
+
+# Distribución y compilación
+build/
+dist/
+*.egg-info/
+
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Herramientas de Python
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.pyre/
