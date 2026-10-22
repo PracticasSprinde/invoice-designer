@@ -1,65 +1,70 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
-# uvicorn uvicorn app.routers.clients:app --reload
-
-# Instáncia de FastAPI
-app = FastAPI()
-# app = FastAPI(prefix = "/clients", tags= ["Clients"])
-
+# Definir rutas
+router = APIRouter(prefix="/clients", tags=["Clients"])
 
 # Entidad
 class Client(BaseModel):
     client_id: int
     name: str
-    lastName: str
+    last_name: str
+    email: str
     enterprise: str
     cif_nif: str
-    phone: int
+    phone: str
 
 
 client_list = [
-    Client(client_id=1, name="Paco", lastName="Saez", enterprise="Google", cif_nif="B075673", phone=666666666),
-    Client(client_id=2, name="Sara", lastName="Alonso",enterprise="Prisma", cif_nif="B0533567", phone=444444444),
-    Client(client_id=3, name="Laura", lastName="Pascual",enterprise="Pallicer", cif_nif="B85373", phone=777777777),
-    Client(client_id=4, name="Sergio", lastName="Perez",enterprise="Toyota", cif_nif="B88337", phone=699999999)
+    Client(client_id=1, name="Paco", last_name="Saez", email= "aaa@gmail.com",enterprise="Google", cif_nif="B075673", phone="666666666"),
+    Client(client_id=2, name="Sara", last_name="Alonso",email= "aaa@gmail.com", enterprise="Prisma", cif_nif="B0533567", phone="444444444"),
+    Client(client_id=3, name="Laura", last_name="Pascual",email= "aaa@gmail.com", enterprise="Pallicer", cif_nif="B85373", phone="777777777"),
+    Client(client_id=4, name="Sergio", last_name="Perez",email= "aaa@gmail.com", enterprise="Toyota", cif_nif="B88337", phone="699999999")
 ]
 
-# Visualizar todos los clientes
-@app.get("/clients")
-async def get_clients():
-    return client_list
+def find_client(client_id: int) -> Client | None:
+    return next((c for c in client_list if c.client_id == client_id), None)
 
+# Visualizar todos los clientes
+@router.get("/")
+def all_clients():
+    if not client_list:
+        raise HTTPException(status_code=404, detail="No hay clientes")
+    return client_list
 
 
 # Visualizar cliente por ID - Path --> clientquery/5
 # Parametros obligatorios
-@app.get("/client/{id}")
-async def get_client_id(id: int):
-    return buscar_cliente(id)
+@router.get("/{client_id}")
+def find_client_id(client_id: int):
+    client = find_client(client_id)
+    if client is None:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    return client
 
 
 
 # Visualizar cliente por ID - Query --> clientquery/?id=5
 # Parametros no obligatorios para la query
-@app.get("/clientquery/")
-async def get_client_id(id: int):
-    return buscar_cliente(id)
+# @router.get("/clientquery/")
+# async def get_client_id(id: int):
+#     return buscar_cliente(id)
 
 
 
 # Añadir client
-@app.post("/client/")
+@router.post("/client/")
 async def new_client(client : Client):
     if type(buscar_cliente(client.client_id)) == Client:
         return{"error":"El usuario ya existe"}
     else:
         client_list.append(client)
+        return{"cliente": client}
 
 
 
 # Editar cliente
-@app.put("/client/")
+@router.put("/client/")
 async def update_client(client : Client):
 
     found = False
@@ -77,7 +82,7 @@ async def update_client(client : Client):
 
 
 # Eliminar cliente
-@app.delete("/client/")
+@router.delete("/client/")
 async def delete_client(client : Client):
     if type(buscar_cliente(client.client_id)) == Client:
         return{"error":"El usuario ya existe"}

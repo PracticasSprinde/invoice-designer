@@ -1,21 +1,19 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from app.routers import clients
 
 app = FastAPI()
+
+# Registrar las rutas de clientes
+app.include_router(clients.router)
 
 class Main(BaseModel):
     name: str
     lastName: str
 
-users = [Main(name="Paco", lastName="Saez"),
-         Main(name="Sara", lastName="Alonso"),
-         Main(name="Laura", lastName="Pascual"),
-         Main(name="Sergio", lastName="Perez")
-         ]
-
 @app.get("/")
 async def inicio():
-    return users
+    return {"mensaje": "API funcionando correctamente"}
 
 # Arrancar FastAPI
 # uvicorn app.main:app --reload
