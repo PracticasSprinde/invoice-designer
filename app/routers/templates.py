@@ -1,25 +1,27 @@
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Any
+from typing import Any # Cualquier tipo
 
 # Definir rutas
 router = APIRouter(prefix="/templates", tags=["Templates"])
 
-# Class de plantilla creada
+# Modelo que envia el usuario
 class TemplateCreate(BaseModel):
     name: str
-    layout: dict[str, Any] = {}
+    layout: dict[str, Any] = {} # Opcional
 
-# Class de plantilla recuperada
+# Hereda de TemplateCreate
+# Servidor añade id y fecha de creación
 class Template(TemplateCreate):
     template_id: int
-    created_at: datetime = Field(default_factory = datetime.now)
+    created_at: datetime = Field(default_factory = datetime.now) # Añade fecha en momento de creación
 
-template_list: list[Template] = []
-next_id = 1
+template_list: list[Template] = [] # Base datos temporal
+next_id = 1 # Contador de ID
 
 # Metodo para encontrar las plantillas por ID
+# Recorre lista en busca de plantilla que coincida con ID
 def find_template(template_id: int) -> Template | None:
     return next((t for t in template_list if t.template_id == template_id), None)
 
@@ -32,28 +34,32 @@ def all_templates():
 
 # Obtener plantilla por ID
 @router.get("/{template_id}")
-def find_template(template_id:int):
+def get_template(template_id:int):
     template = find_template(template_id)
     if template is None:
         raise HTTPException(status_code=404, detail="No hay ninguna plantilla con el ID proporcionado")
     return template
 
 # Añadir plantilla
-@router.post("/", status_code=status.HTTP_201_CREATED)
-def create_template(template: Template):
-    if find_template(template.template_id):
-        raise HTTPException(status_code=409, detail="No se ha podido crear la plantilla")
+@router.post("/",response_model=Template, status_code=status.HTTP_201_CREATED)
+def create_template(data: TemplateCreate):
+    global next_id # Variable a modificar fuera de la función
+    template = Template(template_id = next_id, **data.model_dump()) # Convierte modelo en diccionario y desempaqueta
+    next_id += 1
     template_list.append(template)
     return template
 
 # Modificar plantilla
-@router.put("/{template_id}")
-def update_template(template_id:int, template:Template):
-    for index, saved in enumerate(template_list):
-        if saved.template_id == template.template_id:
-            template_list[index] = template
-            return template
-    raise HTTPException(status_code=404, detail="No se ha podido modificar la plantilla")
+# Si existe, cambia nombre y layout
+@router.put("/{template_id}", response_model=Template)
+def update_template(template_id:int, data:TemplateCreate):
+    template = find_template(template_id)
+    if template is  None:
+        raise HTTPException(status_code=404, detail="No se ha podido encontrar la plantilla")
+    template.name = data.name
+    template.layout = data.layout
+    return template
+
 
 # Eliminar plantilla
 @router.delete("/{template_id}", status_code=status.HTT_204_NO_CONTENT)
