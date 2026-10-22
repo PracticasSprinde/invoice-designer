@@ -62,7 +62,7 @@ def update_template(template_id:int, data:TemplateCreate):
 
 
 # Eliminar plantilla
-@router.delete("/{template_id}", status_code=status.HTT_204_NO_CONTENT)
+@router.delete("/{template_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_template(template_id:int):
     template = find_template(template_id)
     if template is None:
