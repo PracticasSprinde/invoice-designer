@@ -1,17 +1,17 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from app.routers import clients, issuers, templates
+from app.routers import clients, issuers, templates, invoices
 
 app = FastAPI()
 
 # Registrar las rutas de clientes
-app.include_router(clients.router)
-app.include_router(issuers.router)
-app.include_router(templates.router)
+app.include_router(clients.router, issuers.router, templates.router, invoices.router)
+
 
 class Main(BaseModel):
     name: str
     lastName: str
+
 
 @app.get("/")
 async def inicio():
