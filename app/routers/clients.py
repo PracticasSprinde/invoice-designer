@@ -22,10 +22,11 @@ client_list = [
     Client(client_id=4, name="Sergio", last_name="Perez",email= "aaa@gmail.com", enterprise="Toyota", cif_nif="B88337", phone="699999999")
 ]
 
+# Metodo para encontrar los clientes por ID
 def find_client(client_id: int) -> Client | None:
     return next((c for c in client_list if c.client_id == client_id), None)
 
-# Visualizar todos los clientes
+# Obtener todos los clientes
 @router.get("/")
 def all_clients():
     if not client_list:
@@ -33,7 +34,7 @@ def all_clients():
     return client_list
 
 
-# Visualizar cliente por ID - Path --> clientquery/5
+# Obtener cliente por ID - Path --> clientquery/5
 # Parametros obligatorios
 @router.get("/{client_id}")
 def find_client_id(client_id: int):
@@ -41,13 +42,6 @@ def find_client_id(client_id: int):
     if client is None:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
     return client
-
-
-# Visualizar cliente por ID - Query --> clientquery/?id=5
-# Parametros no obligatorios para la query
-# @router.get("/clientquery/")
-# async def get_client_id(id: int):
-#     return buscar_cliente(id)
 
 
 # Añadir client
@@ -59,8 +53,8 @@ def create_client(client : Client):
     return client
 
 
-# Editar cliente
-@router.put("/{client_id}",)
+# Modificar cliente
+@router.put("/{client_id}")
 async def update_client(client_id : int, client:Client):
 
     for index, saved in enumerate(client_list):
@@ -78,12 +72,3 @@ def delete_client(client_id : int):
     if client is None:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
     client_list.remove(client)
-
-
-# Metodo para obtener todos los clientes
-# def buscar_cliente(id : int):
-#     client = filter(lambda client: client.client_id == id, client_list)
-#     try:
-#          return list(client)[0]
-#     except:
-#         return {"error": "No se ha encontrado el id"}
