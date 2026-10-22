@@ -43,7 +43,6 @@ def find_client_id(client_id: int):
     return client
 
 
-
 # Visualizar cliente por ID - Query --> clientquery/?id=5
 # Parametros no obligatorios para la query
 # @router.get("/clientquery/")
@@ -51,56 +50,40 @@ def find_client_id(client_id: int):
 #     return buscar_cliente(id)
 
 
-
 # Añadir client
-@router.post("/client/")
-async def new_client(client : Client):
-    if type(buscar_cliente(client.client_id)) == Client:
-        return{"error":"El usuario ya existe"}
-    else:
-        client_list.append(client)
-        return{"cliente": client}
-
+@router.post("/", status_code=status.HTTP_201_CREATED)
+def create_client(client : Client):
+    if find_client(client.client_id):
+        raise HTTPException(status_code=409, detail="El cliente ya existe")
+    client_list.append(client)
+    return client
 
 
 # Editar cliente
-@router.put("/client/")
-async def update_client(client : Client):
+@router.put("/{client_id}",)
+async def update_client(client_id : int, client:Client):
 
-    found = False
+    for index, saved in enumerate(client_list):
 
-    for index, save_client in enumerate(client_list):
-
-        if save_client.client_id == client.client_id:
+        if saved.client_id == client.client_id:
             client_list[index] = client
-            found = True
-            return{"mensaje":"Usuario modificado"}
-
-    if not found:
-        return{"error":"Ususario no encontrado"}
-            
+            return client
+    raise HTTPException(status_code=404, detail="Cliente no encontrado")
 
 
 # Eliminar cliente
-@router.delete("/client/")
-async def delete_client(client : Client):
-    if type(buscar_cliente(client.client_id)) == Client:
-        return{"error":"El usuario ya existe"}
-    else:
-        client_list.append(client)
-
-
-
-
-
-
-
+@router.delete("/{client_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_client(client_id : int):
+    client = find_client(client_id)
+    if client is None:
+        raise HTTPException(status_code=404, detail="Cliente no encontrado")
+    client_list.remove(client)
 
 
 # Metodo para obtener todos los clientes
-def buscar_cliente(id : int):
-    client = filter(lambda client: client.client_id == id, client_list)
-    try:
-         return list(client)[0]
-    except:
-        return {"error": "No se ha encontrado el id"}
+# def buscar_cliente(id : int):
+#     client = filter(lambda client: client.client_id == id, client_list)
+#     try:
+#          return list(client)[0]
+#     except:
+#         return {"error": "No se ha encontrado el id"}
