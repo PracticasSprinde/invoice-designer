@@ -37,7 +37,7 @@ def all_clients():
 # Obtener cliente por ID - Path --> clientquery/5
 # Parametros obligatorios
 @router.get("/{client_id}")
-def find_client_id(client_id: int):
+def get_client(client_id: int):
     client = find_client(client_id)
     if client is None:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")

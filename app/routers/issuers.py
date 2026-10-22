@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
 
 # Instáncia de FastAPI
 router = APIRouter(prefix="/issuers", tags=["Issuers"])
@@ -30,14 +31,15 @@ def find_issuer(issuer_id: int) -> Issuer | None:
 def all_issuers():
     if not issuer_list:
         raise HTTPException(status_code=404, detail="No se ha encontrado el emisor")
+    return issuer_list
 
 # Obtener emisor por ID
 @router.get("/{issuer_id}")
-def find_issuer(issuer_id:int):
+def get_issuer(issuer_id:int):
     issuer = find_issuer(issuer_id)
     if issuer is None:
         raise HTTPException(status_code=404, detail="No hay ningún emisor con el id proporcionado")
-    return issuer_list
+    return issuer
 
 # Añadir emisor
 @router.post("/", status_code=status.HTTP_201_CREATED)
