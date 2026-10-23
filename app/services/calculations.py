@@ -5,6 +5,23 @@ from decimal import Decimal, ROUND_HALF_UP
 #Funciones de calculos para las facturas
 
 
+# Calcula los importes de una linea:
+#   - line_amount: Cantidad * precio, aplicando el descuento de esa linea
+#   - tax_amount: IVA correspondiente a esa linea
+#
+# El descuento global no modifica el importe de la línea que se muestra,
+# pero se aplica al calcular el IVA de la factura.o.
+#
+# Orden: descuento de línea -> descuento global -> IVA.
+def calculate_line(line, global_discount_percent):
+    gross = line.quantity * line.unit_price # Importe bruto
+    line_discount = calculate_discount(gross, global_discount_percent) # Euros de descuento de linea
+    line_amount = gross - line_discount # Mostrado como "Importe"
+    global_discount = calculate_discount(line_amount, global_discount_percent) #Euros de descuento global
+    taxable = line_amount - global_discount # Base para el IVA
+    tax_amount = taxable * line.tax_rate / Decimal("100") # Cantidad IVA en euros
+    return round_money(line_amount), round_money(tax_amount)
+
 
 # Calcula el subtotal sumando los importes de todas las líneas de la factura
 def calculate_subtotal(lines):
