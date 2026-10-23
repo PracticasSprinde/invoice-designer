@@ -2,27 +2,37 @@ from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 from decimal import Decimal
 from datetime import date
+from typing import Any
 from app.services.calculations import calculate_invoice_totals
 
 router = APIRouter(prefix="/invoices", tags=["Invoices"])
 
 # Modelo para los datos de cada línea de la factura
 class InvoiceLineCreate(BaseModel):
+    category: str | None = None
     description: str = Field(min_length=1)
-    quantity: Decimal = Field(gt=0)
+    extra: dict[str, Any] = {}
     unit_price: Decimal = Field(ge=0)
+    quantity: Decimal = Field(gt=0)
+    discount_percent: Decimal = Field(default=Decimal("0"),ge=0, le=100)
     tax_rate: Decimal = Field(default=Decimal("21"), ge=0, le=100) # 21% IVA
+
+
+# Línea de factura con los importes calculados de la linea y la cuota de IVA de la linea
+class InvoiceLine(InvoiceLineCreate):
+    line_amount: Decimal
+    tax_amount: Decimal
 
 
 # Modelo con los datos necesarios para crear una factura
 class InvoiceCreate(BaseModel):
     number: str = Field(min_length=1)
     issue_date: date = Field(default_factory=date.today) ##Fecha de hoy
-    notes: str | None = None
-    issuer_id: int
     client_id: int
+    issuer_id: int
     template_id: int | None = None
-    discount_percent: Decimal = Field(default=Decimal("0"),ge=0, le=100)
+    global_discount_percent: Decimal = Field(default=Decimal("0"),ge=0, le=100)
+    notes: str | None = None
     lines: list[InvoiceLineCreate] = Field(min_length=1) # Mínimo una línea
 
 
@@ -33,6 +43,7 @@ class Invoice(InvoiceCreate):
     discount_amount: Decimal
     tax_amount: Decimal
     total: Decimal
+    lines: list[InvoiceLine] = Field(min_length=1) # Mínimo una línea
 
 
 # Modelo con los importes que devuelve la vista previa
@@ -43,7 +54,7 @@ class InvoiceTotals(BaseModel):
     total: Decimal
 
 
-# Calcula los importes sin guardar la factura
+# Calcula los importes sin guardar la factura (vista previa)
 @router.post("/preview", response_model=InvoiceTotals)
 def preview_invoice(data: InvoiceCreate):
-    return calculate_invoice_totals(data.lines, data.discount_percent)
+    return calculate_invoice_totals(data.lines, data.global_discount_percent)
