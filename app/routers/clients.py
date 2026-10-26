@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
-# Definir rutas
+# Define ruta
 router = APIRouter(prefix="/clients", tags=["Clients"])
+
+# -----------------------------CLASES-----------------------------
 
 # Entidad
 class Client(BaseModel):
@@ -15,6 +17,8 @@ class Client(BaseModel):
     phone: str
 
 
+# -----------------------------ATRIBUTOS Y METODOS-----------------------------
+
 client_list = [
     Client(client_id=1, name="Paco", last_name="Saez", email= "aaa@gmail.com",enterprise="Google", cif_nif="B075673", phone="666666666"),
     Client(client_id=2, name="Sara", last_name="Alonso",email= "aaa@gmail.com", enterprise="Prisma", cif_nif="B0533567", phone="444444444"),
@@ -22,9 +26,13 @@ client_list = [
     Client(client_id=4, name="Sergio", last_name="Perez",email= "aaa@gmail.com", enterprise="Toyota", cif_nif="B88337", phone="699999999")
 ]
 
+
 # Metodo para encontrar los clientes por ID
 def find_client(client_id: int) -> Client | None:
     return next((c for c in client_list if c.client_id == client_id), None)
+
+
+# -----------------------------ENDPOINTS-----------------------------
 
 # Obtener todos los clientes
 @router.get("/")

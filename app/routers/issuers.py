@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
-# Instáncia de FastAPI
+# Define ruta
 router = APIRouter(prefix="/issuers", tags=["Issuers"])
+
+# -----------------------------CLASES-----------------------------
 
 # Entidad
 class Issuer(BaseModel):
@@ -15,6 +17,8 @@ class Issuer(BaseModel):
     phone: str
 
 
+# -----------------------------ATRIBUTOS Y METODOS-----------------------------
+
 issuer_list = [
     Issuer(issuer_id=1, name="Paco", last_name="Saez", email= "aaa@gmail.com",enterprise="Google", cif_nif="B075673", phone="666666666"),
     Issuer(issuer_id=2, name="Sara", last_name="Alonso",email= "aaa@gmail.com", enterprise="Prisma", cif_nif="B0533567", phone="444444444"),
@@ -25,6 +29,9 @@ issuer_list = [
 # Metodo para encontrar los emisores por ID
 def find_issuer(issuer_id: int) -> Issuer | None:
     return next((i for i in issuer_list if i.issuer_id == issuer_id), None)
+
+
+# -----------------------------ENDPOINTS-----------------------------
 
 # Obtener todos los emisores
 @router.get("/")

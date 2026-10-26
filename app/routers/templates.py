@@ -3,13 +3,16 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Any # Cualquier tipo
 
-# Definir rutas
+# Define ruta
 router = APIRouter(prefix="/templates", tags=["Templates"])
+
+# -----------------------------CLASES-----------------------------
 
 # Modelo que envia el usuario
 class TemplateCreate(BaseModel):
     name: str
     layout: dict[str, Any] = {} # Opcional
+
 
 # Hereda de TemplateCreate
 # Servidor añade id y fecha de creación
@@ -17,13 +20,18 @@ class Template(TemplateCreate):
     template_id: int
     created_at: datetime = Field(default_factory = datetime.now) # Añade fecha en momento de creación
 
+
+# -----------------------------ATRIBUTOS Y METODOS-----------------------------
+
 template_list: list[Template] = [] # Base datos temporal
 next_id = 1 # Contador de ID
 
-# Metodo para encontrar las plantillas por ID
+
 # Recorre lista en busca de plantilla que coincida con ID
 def find_template(template_id: int) -> Template | None:
     return next((t for t in template_list if t.template_id == template_id), None)
+
+# -----------------------------ENDPOINTS-----------------------------
 
 # Obtener todas las plantillas
 @router.get("/")
@@ -31,6 +39,7 @@ def all_templates():
     if not template_list:
         raise HTTPException(status_code=404, detail="No hay plantillas almacenadas")
     return template_list
+
 
 # Obtener plantilla por ID
 @router.get("/{template_id}")
@@ -40,6 +49,7 @@ def get_template(template_id:int):
         raise HTTPException(status_code=404, detail="No hay ninguna plantilla con el ID proporcionado")
     return template
 
+
 # Añadir plantilla
 @router.post("/",response_model=Template, status_code=status.HTTP_201_CREATED)
 def create_template(data: TemplateCreate):
@@ -48,6 +58,7 @@ def create_template(data: TemplateCreate):
     next_id += 1
     template_list.append(template)
     return template
+
 
 # Modificar plantilla
 # Si existe, cambia nombre y layout
