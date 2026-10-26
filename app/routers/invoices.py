@@ -60,16 +60,35 @@ class InvoiceTotals(BaseModel):
 
 # -----------------------------ATRIBUTOS Y METODOS-----------------------------
 
-invoice_list : list[Invoice] = []
-next_id: 1
+invoice_list: list[Invoice] = []
+next_id = 1
 
 
 # Recorre lista en busca de plantilla que coincida con ID
 def find_invoice(invoice_id: int) -> Invoice | None:
-    return next((i for i in invoice_list if i.invoice_id == invoice_id), None)
+    for invoice in invoice_list:
+        if invoice.invoice_id == invoice_id:
+            return invoice
+    return None 
+    #return next((i for i in invoice_list if i.invoice_id == invoice_id), None)
 
 
 # -----------------------------ENDPOINTS-----------------------------
+
+# Obtener todas las facturas
+@router.get("/")
+def all_invoices():
+    return invoice_list
+
+
+# Obtener factura por ID
+@router.get("/{invoice_id}", response_model=Invoice)
+def get_invoice(invoice_id: int):
+    invoice = find_invoice(invoice_id)
+    if invoice is None:
+        raise HTTPException(status_code=404, detail="Factura no encontrada")
+    return invoice
+
 
 # Calcula los importes sin guardar la factura (vista previa)
 @router.post("/preview", response_model=InvoiceTotals)
@@ -77,12 +96,12 @@ def preview_invoice(data: InvoiceCreate):
     return calculate_invoice_totals(data.lines, data.global_discount_percent)
 
 
-#Calcula el importe de la linea
+# Crea una factura: calcula sus líneas y totales y la guarda
 @router.post("/", response_model=Invoice, status_code=status.HTTP_201_CREATED)
 def create_invoice(data: InvoiceCreate):
     global next_id
 
-    # No permite numero d efactura repetido
+    # No permite numero de factura repetido
     for invoice in invoice_list:
         if invoice.number == data.number:
             raise HTTPException(status_code=409, detail="Ya existe una factura con ese número")
@@ -98,7 +117,7 @@ def create_invoice(data: InvoiceCreate):
     # Calculo de los totales de la factura
     totals = calculate_invoice_totals(data.lines, data.global_discount_percent)
 
-    # Contruye factura y la guarda
+    # Construye factura y la guarda
     invoice = Invoice(
         **data.model_dump(exclude={"lines"}),
         invoice_id=next_id,
@@ -107,4 +126,4 @@ def create_invoice(data: InvoiceCreate):
     )
     next_id +=1
     invoice_list.append(invoice)
-    return Invoice
+    return invoice

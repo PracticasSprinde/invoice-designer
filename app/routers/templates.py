@@ -42,7 +42,7 @@ def all_templates():
 
 
 # Obtener plantilla por ID
-@router.get("/{template_id}")
+@router.get("/{template_id}", response_model=Template)
 def get_template(template_id:int):
     template = find_template(template_id)
     if template is None:
