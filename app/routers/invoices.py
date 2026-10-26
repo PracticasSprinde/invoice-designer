@@ -64,13 +64,9 @@ invoice_list: list[Invoice] = []
 next_id = 1
 
 
-# Recorre lista en busca de plantilla que coincida con ID
+# Devuelve la primera factura que coincida con el ID
 def find_invoice(invoice_id: int) -> Invoice | None:
-    for invoice in invoice_list:
-        if invoice.invoice_id == invoice_id:
-            return invoice
-    return None 
-    #return next((i for i in invoice_list if i.invoice_id == invoice_id), None)
+    return next((i for i in invoice_list if i.invoice_id == invoice_id), None)
 
 
 # -----------------------------ENDPOINTS-----------------------------
@@ -164,7 +160,6 @@ def update_invoice(invoice_id: int, data: InvoiceCreate):
     index = invoice_list.index(invoice)
     invoice_list[index] = updated
     return updated
-
 
 
 # Eliminar factura

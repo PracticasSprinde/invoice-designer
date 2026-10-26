@@ -27,7 +27,7 @@ template_list: list[Template] = [] # Base datos temporal
 next_id = 1 # Contador de ID
 
 
-# Recorre lista en busca de plantilla que coincida con ID
+# Devuelve la primera plantilla que coincida con el ID
 def find_template(template_id: int) -> Template | None:
     return next((t for t in template_list if t.template_id == template_id), None)
 

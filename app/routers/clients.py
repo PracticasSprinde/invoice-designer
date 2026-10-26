@@ -27,7 +27,7 @@ client_list = [
 ]
 
 
-# Metodo para encontrar los clientes por ID
+# Devuelve el primer cliente que coincida con el ID
 def find_client(client_id: int) -> Client | None:
     return next((c for c in client_list if c.client_id == client_id), None)
 

@@ -26,7 +26,7 @@ issuer_list = [
     Issuer(issuer_id=4, name="Sergio", last_name="Perez",email= "aaa@gmail.com", enterprise="Toyota", cif_nif="B88337", phone="699999999")
 ]
 
-# Metodo para encontrar los emisores por ID
+# Devuelve el primer emisor que coincida con el ID
 def find_issuer(issuer_id: int) -> Issuer | None:
     return next((i for i in issuer_list if i.issuer_id == issuer_id), None)
 
