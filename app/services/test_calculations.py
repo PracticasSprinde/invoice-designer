@@ -1,7 +1,7 @@
 from decimal import Decimal
 from types import SimpleNamespace
 
-from app.services.calculations import calculate_line, calculate_discount, round_money, calculate_invoice_totals
+from app.services.calculations import calculate_line, calculate_invoice_totals
 
 # Crear líneas de prueba
 lines = [
