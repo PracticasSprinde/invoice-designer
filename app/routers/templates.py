@@ -1,24 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel, Field
-from datetime import datetime
-from typing import Any # Cualquier tipo
+from app.schemas.templates import TemplateCreate, Template
+
 
 # Define ruta
 router = APIRouter(prefix="/templates", tags=["Templates"])
 
-# -----------------------------CLASES-----------------------------
-
-# Modelo que envia el usuario
-class TemplateCreate(BaseModel):
-    name: str
-    layout: dict[str, Any] = {} # Opcional
-
-
-# Hereda de TemplateCreate
-# Servidor añade id y fecha de creación
-class Template(TemplateCreate):
-    template_id: int
-    created_at: datetime = Field(default_factory = datetime.now) # Añade fecha en momento de creación
 
 
 # -----------------------------ATRIBUTOS Y METODOS-----------------------------

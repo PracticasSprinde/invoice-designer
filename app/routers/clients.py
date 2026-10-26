@@ -1,20 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel
+from app.schemas.clients import Client
 
 # Define ruta
 router = APIRouter(prefix="/clients", tags=["Clients"])
-
-# -----------------------------CLASES-----------------------------
-
-# Entidad
-class Client(BaseModel):
-    client_id: int
-    name: str
-    last_name: str
-    email: str
-    enterprise: str
-    cif_nif: str
-    phone: str
 
 
 # -----------------------------ATRIBUTOS Y METODOS-----------------------------

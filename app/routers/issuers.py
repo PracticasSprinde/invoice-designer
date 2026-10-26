@@ -1,21 +1,8 @@
 from fastapi import APIRouter, HTTPException, status
-from pydantic import BaseModel
+from app.schemas.issuers import Issuer
 
 # Define ruta
 router = APIRouter(prefix="/issuers", tags=["Issuers"])
-
-# -----------------------------CLASES-----------------------------
-
-# Entidad
-class Issuer(BaseModel):
-    issuer_id: int
-    name: str
-    last_name: str
-    email: str
-    enterprise: str
-    cif_nif: str
-    phone: str
-
 
 # -----------------------------ATRIBUTOS Y METODOS-----------------------------
 
