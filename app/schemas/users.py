@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, EmailStr
 
-class IssuerCreate(BaseModel):
+class UserCreate(BaseModel):
     name: str = Field(min_length=1)
     last_name: str | None = None
     enterprise: str | None = None
@@ -9,8 +9,8 @@ class IssuerCreate(BaseModel):
     phone: str | None = None
     adress: str = Field(min_length=1)
     city: str = Field(min_length=1)
-    postal_code: int = Field(min_length=1)
+    postal_code: str = Field(min_length=1)
     country: str = Field(default="España", min_length=1)
 
-class Issuer(IssuerCreate):
-    issuer_id: int
+class User(UserCreate):
+    user_id: int

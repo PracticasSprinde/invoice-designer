@@ -20,26 +20,31 @@ def find_template(template_id: int) -> Template | None:
 # -----------------------------ENDPOINTS-----------------------------
 
 # Obtener todas las plantillas
-@router.get("/")
-def all_templates():
+@router.get("/", summary="Get list of templates")
+def get_templates():
     if not template_list:
-        raise HTTPException(status_code=404, detail="No hay plantillas almacenadas")
+        raise HTTPException(status_code=404, detail="No registered templates found.")
     return template_list
 
 
 # Obtener plantilla por ID
-@router.get("/{template_id}", response_model=Template)
+@router.get("/{template_id}", summary="Get a template by ID", response_model=Template)
 def get_template(template_id:int):
     template = find_template(template_id)
     if template is None:
-        raise HTTPException(status_code=404, detail="No hay ninguna plantilla con el ID proporcionado")
+        raise HTTPException(status_code=404, detail=f"No template found with ID {template_id}.")
     return template
 
 
 # Añadir plantilla
-@router.post("/",response_model=Template, status_code=status.HTTP_201_CREATED)
+@router.post("/", summary="Create a new template", response_model=Template, status_code=status.HTTP_201_CREATED)
 def create_template(data: TemplateCreate):
     global next_id # Variable a modificar fuera de la función
+
+    for template in template_list:
+        if template.name == data.name:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=f"Creation failed: a template with name {data.name} already exists")
+
     template = Template(template_id = next_id, **data.model_dump()) # Convierte modelo en diccionario y desempaqueta
     next_id += 1
     template_list.append(template)
@@ -48,20 +53,20 @@ def create_template(data: TemplateCreate):
 
 # Modificar plantilla
 # Si existe, cambia nombre y layout
-@router.put("/{template_id}", response_model=Template)
+@router.put("/{template_id}",summary="Update an existing template", response_model=Template)
 def update_template(template_id:int, data:TemplateCreate):
     template = find_template(template_id)
     if template is  None:
-        raise HTTPException(status_code=404, detail="No se ha podido encontrar la plantilla")
+        raise HTTPException(status_code=404, detail=f"Update failed: template with ID {template_id} not found.")
     template.name = data.name
     template.layout = data.layout
     return template
 
 
 # Eliminar plantilla
-@router.delete("/{template_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{template_id}", summary="Delete a template", status_code=status.HTTP_204_NO_CONTENT)
 def delete_template(template_id:int):
     template = find_template(template_id)
     if template is None:
-        raise HTTPException(status_code=404, detail="No se ha podido eliminar la plantilla")
+        raise HTTPException(status_code=404, detail=f"Deletion failed: template with ID {template_id} not found.")
     template_list.remove(template)
