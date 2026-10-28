@@ -52,9 +52,7 @@ def create_client(client : Client):
 # Modificar cliente
 @router.put("/{client_id}")
 async def update_client(client_id : int, client:Client):
-
     for index, saved in enumerate(client_list):
-
         if saved.client_id == client.client_id:
             client_list[index] = client
             return client
