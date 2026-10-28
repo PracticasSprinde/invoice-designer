@@ -4,7 +4,7 @@ from typing import Any # Cualquier tipo
 
 # Modelo de la plantilla que envia el usuario
 class TemplateCreate(BaseModel):
-    name: str
+    name: str = Field(min_length=1)
     layout: dict[str, Any] = {} # Opcional
 
 
