@@ -5,7 +5,7 @@ class UserCreate(BaseModel):
     last_name: str | None = Field(default=None, min_length=1, max_length=100)
     enterprise: str | None = Field(default=None, min_length=1, max_length=50)
     cif_nif: str = Field(min_length=1, max_length=25)
-    email: EmailStr | None = Field(default=None, min_length=1, max_length=100)
+    email: EmailStr | None = Field(default=None)
     phone: str | None = Field(default=None, min_length=1, max_length=25)
     address: str = Field(min_length=1, max_length=150)
     city: str = Field(min_length=1, max_length=50)

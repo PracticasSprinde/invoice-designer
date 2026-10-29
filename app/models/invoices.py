@@ -7,12 +7,12 @@ from decimal import Decimal
 class Invoice(Base):
     __tablename__ = "invoices"
 
-    inovice_id: Mapped[int] = mapped_column(primary_key=True)
+    invoice_id: Mapped[int] = mapped_column(primary_key=True)
     
     number: Mapped[str] = mapped_column(String(30))
     issue_date: Mapped[date] = mapped_column(default=date.today)
     notes : Mapped[str | None] = mapped_column(Text)
-    global_discount_percent: Mapped[Decimal] = mapped_column(Numeric(5,2), default="0")
+    global_discount_percent: Mapped[Decimal] = mapped_column(Numeric(5,2), default=Decimal("0"))
 
     client_id: Mapped[int] = mapped_column(ForeignKey("clients.client_id"))
     user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
@@ -28,7 +28,7 @@ class InvoiceLine(Base):
     __tablename__ = "invoice_lines"
 
     line_id: Mapped[int] = mapped_column(primary_key=True)
-    invoice_id: Mapped[int] = mapped_column(ForeignKey("invoice_id"))
+    invoice_id: Mapped[int] = mapped_column(ForeignKey("invoices.invoice_id"))
 
     category: Mapped[str | None] = mapped_column(String(50))
     description: Mapped[str] = mapped_column(String(250))
