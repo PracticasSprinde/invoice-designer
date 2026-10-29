@@ -6,8 +6,8 @@ from typing import Any
 
 # Modelo para los datos de cada línea de la factura
 class InvoiceLineCreate(BaseModel):
-    category: str | None = None
-    description: str = Field(min_length=1)
+    category: str | None = Field(default=None, max_length=50)
+    description: str = Field(min_length=1, max_length=250)
     extra: dict[str, Any] = {}
     unit_price: Decimal = Field(ge=0)
     quantity: Decimal = Field(gt=0)
@@ -23,7 +23,7 @@ class InvoiceLine(InvoiceLineCreate):
 
 # Modelo con los datos necesarios para crear una factura
 class InvoiceCreate(BaseModel):
-    number: str = Field(min_length=1)
+    number: str = Field(min_length=1, max_length=30)
     issue_date: date = Field(default_factory=date.today) ##Fecha de hoy
     client_id: int
     user_id: int
