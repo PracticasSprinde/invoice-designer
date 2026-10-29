@@ -4,8 +4,9 @@ from typing import Any # Cualquier tipo
 
 # Modelo de la plantilla que envia el usuario
 class TemplateCreate(BaseModel):
-    name: str = Field(min_length=1)
+    name: str = Field(min_length=1, max_length=100)
     layout: dict[str, Any] = {} # Opcional
+    user_id: int 
 
 
 # Hereda de TemplateCreate

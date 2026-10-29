@@ -8,7 +8,7 @@ class Client(Base):
     client_id: Mapped[int] = mapped_column(primary_key=True)
 
     name: Mapped[str] = mapped_column(String(100))
-    last_name: Mapped[str | None] = mapped_column(String (100), nullable=True)
+    last_name: Mapped[str | None] = mapped_column(String(100), nullable=True)
     enterprise: Mapped[str | None] = mapped_column(String(50), nullable=True)
     cif_nif: Mapped[str] = mapped_column(String(25))
     email: Mapped[str | None] = mapped_column(String(100), nullable=True)
