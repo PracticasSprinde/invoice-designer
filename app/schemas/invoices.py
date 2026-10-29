@@ -26,7 +26,7 @@ class InvoiceCreate(BaseModel):
     number: str = Field(min_length=1)
     issue_date: date = Field(default_factory=date.today) ##Fecha de hoy
     client_id: int
-    issuer_id: int
+    user_id: int
     template_id: int | None = None
     global_discount_percent: Decimal = Field(default=Decimal("0"),ge=0, le=100)
     notes: str | None = None

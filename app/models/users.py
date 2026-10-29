@@ -10,8 +10,12 @@ class User(Base):
     last_name: Mapped[str | None] = mapped_column(String(100), nullable=True)
     enterprise: Mapped[str | None] = mapped_column(String(50), nullable=True)
     cif_nif: Mapped[str] = mapped_column(String(25))
-    email: 
-
+    email: Mapped[str | None] = mapped_column(String (100), nullable=True, unique=True) 
+    phone: Mapped [str | None] = mapped_column(String(25), nullable=True)
+    address: Mapped[str] = mapped_column(String(100))
+    city: Mapped[str] = mapped_column(String (50))
+    postal_code: Mapped[str] = mapped_column(String(25))
+    country: Mapped[str] = mapped_column(String(100), default="España")
 
 
 
