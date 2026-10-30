@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from decimal import Decimal
 from datetime import date
 from typing import Any
@@ -19,7 +19,7 @@ class InvoiceLineCreate(BaseModel):
 class InvoiceLine(InvoiceLineCreate):
     line_amount: Decimal
     tax_amount: Decimal
-
+    model_config = ConfigDict(from_attributes=True)
 
 # Modelo con los datos necesarios para crear una factura
 class InvoiceCreate(BaseModel):
@@ -41,6 +41,7 @@ class Invoice(InvoiceCreate):
     tax_amount: Decimal
     total: Decimal
     lines: list[InvoiceLine] = Field(min_length=1) # Mínimo una línea
+    model_config = ConfigDict(from_attributes=True)
 
 
 # Modelo con los importes que devuelve la vista previa

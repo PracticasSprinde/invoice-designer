@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
 class ClientCreate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
@@ -15,3 +15,4 @@ class ClientCreate(BaseModel):
 
 class Client(ClientCreate):
     client_id: int
+    model_config = ConfigDict(from_attributes=True)

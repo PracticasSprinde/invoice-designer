@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
 class UserCreate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
@@ -14,3 +14,4 @@ class UserCreate(BaseModel):
 
 class User(UserCreate):
     user_id: int
+    model_config = ConfigDict(from_attributes=True)

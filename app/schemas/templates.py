@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 from typing import Any # Cualquier tipo
 
@@ -14,3 +14,4 @@ class TemplateCreate(BaseModel):
 class Template(TemplateCreate):
     template_id: int
     created_at: datetime = Field(default_factory = datetime.now) # Añade fecha en momento de creación
+    model_config = ConfigDict(from_attributes=True)
