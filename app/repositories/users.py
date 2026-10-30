@@ -34,7 +34,7 @@ def update_user(db: Session, user_id: int, data: UserCreate) -> User | None:
 # Eliminar usuario de la base de datos
 def delete_user(db: Session, user_id: int) -> bool:
     user = get_user(db, user_id)
-    if user is None:
+    if not user:
         return False
     db.delete(user)
     db.commit()
