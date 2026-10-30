@@ -86,7 +86,7 @@ def get_client(client_id: int, db: Session = Depends(get_db)):
 # Modificar cliente
 @router.put("/{client_id}", response_model=ClientSchema, summary="Update an existing client")
 async def update_client(client_id : int, data:ClientCreate, db:Session = Depends(get_db)):
-    client = clients_repo.get_client(client_id, data, db)
+    client = clients_repo.update_client(client_id, data, db)
     if client is None:
         raise HTTPException(status_code=404, detail=f"Update failed: client with ID {client_id} not found")
     return client
