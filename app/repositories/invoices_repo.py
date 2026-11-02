@@ -17,6 +17,7 @@ def create_invoice(data: InvoiceCreate, db: Session) -> Invoice:
     # Calcular y añadir linea
     for line in data.lines:
         line_amount, lines_tax = calculate_line(line, data.global_discount_percent)
+
         invoice.lines.append(
             InvoiceLine(
                 **line.model_dump(), line_amount=line_amount, tax_amount=lines_tax
@@ -42,6 +43,7 @@ def get_invoice(invoice_id: int, db: Session) -> Invoice | None:
 # Modificar factura
 def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session) -> Invoice | None:
     invoice = get_invoice(invoice_id, db)
+    
     if invoice is None:
         return None
 
@@ -64,9 +66,7 @@ def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session) -> Invoice
 
         invoice.lines.append(
             InvoiceLine(
-                **line.model_dump(),
-                line_amount=line_amount, 
-                tax_amount=lines_tax
+                **line.model_dump(), line_amount=line_amount, tax_amount=lines_tax
             )
         )
 
@@ -78,8 +78,10 @@ def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session) -> Invoice
 # Eliminar factura
 def delete_invoice(invoice_id: int, db: Session) -> bool:
     invoice = get_invoice(invoice_id, db)
+
     if not invoice:
         return False
+
     db.delete(invoice)
     db.commit()
     return True
