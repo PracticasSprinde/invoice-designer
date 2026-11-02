@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
-from app.models.users import User
-from app.schemas.users import UserCreate
+from app.models.users_mdl import User
+from app.schemas.users_sch import UserCreate
 
 # Añadir usuario en la base de datos
 def create_user(data: UserCreate, db: Session) -> User:
@@ -20,7 +20,7 @@ def list_users(db: Session) -> list[User]:
 
 # Retorna usuario por ID
 def get_user(user_id: int, db:Session) -> User | None:
-    return db.get(user_id, User)
+    return db.get(User, user_id)
 
 
 # Modificar usuario

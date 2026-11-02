@@ -1,5 +1,10 @@
-from app.models.users import User
-from app.models.clients import Client
+from app.models.users_mdl import User
+from app.models.clients_mdl import Client
+from app.models.templates_mdl import Template
+from app.models.invoices_mdl import Invoice
+
+
+# ================== PRUEBAS USUARIOS ==================
 
 # Lista de usuarios
 users_list = [
@@ -15,6 +20,8 @@ def find_user(user_id: int) -> User | None:
     users_list if i.user_id == user_id), None)
 
 
+# ================== PRUEBAS CLIENTES ==================
+
 # Lista de clientes
 client_list = [
     Client(client_id=1, name="Paco", last_name="Saez", email="aaa@gmail.com", enterprise="Google", cif_nif="B075673", phone="666666666", address="Calle Falsa 123", city="Madrid", postal_code="28001",  user_id=1),
@@ -24,6 +31,25 @@ client_list = [
 ]
 
 
-# # Devuelve el primer cliente que coincida con el ID
+# Devuelve el primer cliente que coincida con el ID
 def find_client(client_id: int) -> Client | None:
     return next((c for c in client_list if c.client_id == client_id), None)
+
+
+# ================== PRUEBAS PLANTILLAS ==================
+
+# Variables para la gestión de plantillas
+template_list: list[Template] = [] # Base datos temporal
+
+# Devuelve la primera plantilla que coincida con el ID
+def find_template(template_id: int) -> Template | None:
+    return next((t for t in template_list if t.template_id == template_id), None)
+
+
+# ================== PRUEBAS FACTURAS ==================
+
+invoice_list: list[Invoice] = []
+
+# Devuelve la primera factura que coincida con el ID
+def find_invoice(invoice_id: int) -> Invoice | None:
+    return next((i for i in invoice_list if i.invoice_id == invoice_id), None)

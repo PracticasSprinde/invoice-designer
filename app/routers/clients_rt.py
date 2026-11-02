@@ -2,20 +2,20 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.models.clients import Client
-from app.schemas.clients import Client as ClientSchema, ClientCreate
-from app.repositories  import clients as clients_repo
-from app.routers.prueba_routers import client_list, find_client
+from app.schemas.clients_sch import Client as ClientSchema, ClientCreate
+from app.repositories import clients_repo as clients_repo
+from app.routers.prueba_rt import client_list, find_client
 
 
 # Define ruta
 router = APIRouter(prefix="/clients", tags=["Clients"])
+router_memory = APIRouter(prefix="/memory/clients", tags=["Clients (memory)"])
 
 # ================== CONSULTAS API ==================
 
 # Añadir cliente
-@router.post("/", summary="Create a new client" ,status_code=status.HTTP_201_CREATED)
-def create_client(client : Client):
+@router_memory.post("/", summary="Create a new client" ,status_code=status.HTTP_201_CREATED)
+def create_client(client : ClientSchema):
     if find_client(client.client_id):
         raise HTTPException(status_code=409, detail=f"Creation failed: client with ID {client.client_id} already exists")
     client_list.append(client)
@@ -23,7 +23,7 @@ def create_client(client : Client):
 
 
 # Obtener todos los clientes
-@router.get("/", summary="Get list of clients")
+@router_memory.get("/", summary="Get list of clients")
 def get_clients():
     if not client_list:
         raise HTTPException(status_code=404, detail="No registered clients found.")
@@ -31,7 +31,7 @@ def get_clients():
 
 
 # Obtener cliente por ID - Path --> client/5
-@router.get("/{client_id}", summary="Get a client by ID")
+@router_memory.get("/{client_id}", summary="Get a client by ID")
 def get_client(client_id: int):
     client = find_client(client_id)
     if client is None:
@@ -40,8 +40,8 @@ def get_client(client_id: int):
 
 
 # Modificar cliente
-@router.put("/{client_id}", summary="Update an existing client")
-def update_client(client_id : int, client:Client):
+@router_memory.put("/{client_id}", summary="Update an existing client")
+def update_client(client_id : int, client:ClientSchema):
     for index, saved in enumerate(client_list):
         if saved.client_id == client_id:
             client.client_id = client_id
@@ -51,7 +51,7 @@ def update_client(client_id : int, client:Client):
 
 
 # Eliminar cliente
-@router.delete("/{client_id}", summary="Delete a client" ,status_code=status.HTTP_204_NO_CONTENT)
+@router_memory.delete("/{client_id}", summary="Delete a client" ,status_code=status.HTTP_204_NO_CONTENT)
 def delete_client(client_id : int):
     client = find_client(client_id)
     if client is None:
@@ -93,7 +93,7 @@ async def update_client(client_id : int, data:ClientCreate, db:Session = Depends
 
 
 # Eliminar cliente
-@router.delete("/{client_id}", response_model=ClientSchema, summary="Delete a client" ,status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{client_id}", summary="Delete a client" ,status_code=status.HTTP_204_NO_CONTENT)
 def delete_client(client_id : int, db:Session = Depends(get_db), ):
     client = clients_repo.delete_client(client_id, db)
     if not client:

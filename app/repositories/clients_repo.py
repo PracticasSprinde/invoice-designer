@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
-from app.models.clients import Client
-from app.schemas.clients import ClientCreate
+from app.models.clients_mdl import Client
+from app.schemas.clients_sch import ClientCreate
 
 # Añadir cliente en la base de datos
 def create_client( data: ClientCreate, db: Session) -> Client:
@@ -20,7 +20,7 @@ def list_clients(db: Session) -> list[Client]:
 
 # Retorna cliente por ID
 def get_client(client_id: int, db: Session) -> Client | None:
-    return db.get(client_id, Client)
+    return db.get(Client, client_id)
 
 
 # Modifica cliente

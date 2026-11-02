@@ -2,19 +2,19 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.models.users import User
-from app.schemas.users import User as UserSchema, UserCreate
-from app.repositories import users as users_repo
-from app.routers.prueba_routers import users_list, find_user
+from app.schemas.users_sch import User as UserSchema, UserCreate
+from app.repositories import users_repo as users_repo
+from app.routers.prueba_rt import users_list, find_user
 
 # Define ruta
 router = APIRouter(prefix="/users", tags=["Users"])
+router_memory = APIRouter(prefix="/memory/users", tags=["Users (memory)"])
 
 # ================== CONSULTAS API ==================
 
 # Añadir usuario
-@router.post("/", summary="Create a new user", status_code=status.HTTP_201_CREATED)
-def create_user(user : User):
+@router_memory.post("/", summary="Create a new user", status_code=status.HTTP_201_CREATED)
+def create_user(user : UserSchema):
     if find_user(user.user_id):
         raise HTTPException(status_code=409, detail=f"Creation failed: user with ID {user.user_id} already exists.")
     users_list.append(user)
@@ -22,7 +22,7 @@ def create_user(user : User):
 
 
 # Obtener todos los usuarios
-@router.get("/", summary="Get list of users")
+@router_memory.get("/", summary="Get list of users")
 def get_users():
     if not users_list:
         raise HTTPException(status_code=404, detail="No registered users found.")
@@ -30,7 +30,7 @@ def get_users():
 
 
 # Obtener usuario por ID
-@router.get("/{user_id}", summary="Get a user by ID")
+@router_memory.get("/{user_id}", summary="Get a user by ID")
 def get_user(user_id:int):
     user = find_user(user_id)
     if user is None:
@@ -39,8 +39,8 @@ def get_user(user_id:int):
 
 
 # Modificar usuario
-@router.put("/{user_id}", summary="Update an existing user")
-def update_user(user_id: int, user:User):
+@router_memory.put("/{user_id}", summary="Update an existing user")
+def update_user(user_id: int, user:UserSchema):
     for index, saved in enumerate (users_list):
         if saved.user_id == user_id:
             user.user_id = user_id
@@ -50,7 +50,7 @@ def update_user(user_id: int, user:User):
 
 
 # Eliminar usuario
-@router.delete("/{user_id}", summary="Delete a user", status_code=status.HTTP_204_NO_CONTENT)
+@router_memory.delete("/{user_id}", summary="Delete a user", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(user_id: int):
     user = find_user(user_id)
     if user is None:

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
-from app.models.templates import Template
-from app.schemas.templates import TemplateCreate
+from app.models.templates_mdl import Template
+from app.schemas.templates_sch import TemplateCreate
 
 # Añadir plantilla en la base de datos
 def create_template(data: TemplateCreate, db: Session) -> Template:
@@ -18,7 +18,7 @@ def list_templates(db: Session) -> list[Template]:
 
 # Retorna plantilla por ID
 def get_template(template_id: int, db: Session) -> Template | None:
-    return db.get(template_id, Template)
+    return db.get(Template, template_id)
 
 # Modificar plantilla
 def update_template(template_id: int, data: TemplateCreate, db: Session) -> Template | None:

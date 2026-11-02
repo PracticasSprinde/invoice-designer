@@ -1,49 +1,25 @@
 from fastapi import APIRouter, HTTPException, status
-from app.schemas.invoices import InvoiceLine, InvoiceCreate, Invoice, InvoiceTotals
+
+from app.schemas.invoices_sch import InvoiceLine, InvoiceCreate, Invoice, InvoiceTotals
 from app.services.calculations import calculate_line,calculate_invoice_totals
+from app.routers.prueba_rt import invoice_list, find_invoice
 
 # Define ruta
 router = APIRouter(prefix="/invoices", tags=["Invoices"])
+router_memory = APIRouter(prefix="/memory/invoices", tags=["Invoices (memory)"])
 
-
-# -----------------------------ATRIBUTOS Y METODOS-----------------------------
-
-invoice_list: list[Invoice] = []
 next_id = 1
-
-
-# Devuelve la primera factura que coincida con el ID
-def find_invoice(invoice_id: int) -> Invoice | None:
-    return next((i for i in invoice_list if i.invoice_id == invoice_id), None)
-
 
 # -----------------------------ENDPOINTS-----------------------------
 
-# Obtener todas las facturas
-@router.get("/", summary="Get list of invoices")
-def get_invoices():
-    if not invoice_list:
-            raise HTTPException(status_code=404, detail="No registered invoices found.")
-    return invoice_list
-
-
-# Obtener factura por ID
-@router.get("/{invoice_id}", summary="Get an invoice by ID", response_model=Invoice)
-def get_invoice(invoice_id: int):
-    invoice = find_invoice(invoice_id)
-    if invoice is None:
-        raise HTTPException(status_code=404, detail=f"No invoice found with ID {invoice_id}.")
-    return invoice
-
-
 # Calcula los importes sin guardar la factura (vista previa)
-@router.post("/preview", summary="Create a preview invoice", response_model=InvoiceTotals)
+@router_memory.post("/preview", summary="Create a preview invoice", response_model=InvoiceTotals)
 def preview_invoice(data: InvoiceCreate):
     return calculate_invoice_totals(data.lines, data.global_discount_percent)
 
 
 # Crea una factura: calcula sus líneas y totales y la guarda
-@router.post("/", summary="Create a new invoice", response_model=Invoice, status_code=status.HTTP_201_CREATED)
+@router_memory.post("/", summary="Create a new invoice", response_model=Invoice, status_code=status.HTTP_201_CREATED)
 def create_invoice(data: InvoiceCreate):
     global next_id
 
@@ -74,9 +50,25 @@ def create_invoice(data: InvoiceCreate):
     invoice_list.append(invoice)
     return invoice
 
+# Obtener todas las facturas
+@router_memory.get("/", summary="Get list of invoices")
+def get_invoices():
+    if not invoice_list:
+            raise HTTPException(status_code=404, detail="No registered invoices found.")
+    return invoice_list
+
+
+# Obtener factura por ID
+@router_memory.get("/{invoice_id}", summary="Get an invoice by ID", response_model=Invoice)
+def get_invoice(invoice_id: int):
+    invoice = find_invoice(invoice_id)
+    if invoice is None:
+        raise HTTPException(status_code=404, detail=f"No invoice found with ID {invoice_id}.")
+    return invoice
+
 
 # Modificar factura
-@router.put("/{invoice_id}", summary="Update an existing invoice", response_model=Invoice)
+@router_memory.put("/{invoice_id}", summary="Update an existing invoice", response_model=Invoice)
 def update_invoice(invoice_id: int, data: InvoiceCreate):
     invoice = find_invoice(invoice_id)
     if invoice is None:
@@ -113,7 +105,7 @@ def update_invoice(invoice_id: int, data: InvoiceCreate):
 
 
 # Eliminar factura
-@router.delete("/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT)
+@router_memory.delete("/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT)
 def delete_invoice(invoice_id:int):
     invoice = find_invoice(invoice_id)
     if invoice is None:

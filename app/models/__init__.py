@@ -1,4 +1,4 @@
-from app.models.users import User
-from app.models.clients import Client
-from app.models.templates import Template
-from app.models.invoices import Invoice, InvoiceLine
+from app.models.users_mdl import User
+from app.models.clients_mdl import Client
+from app.models.templates_mdl import Template
+from app.models.invoices_mdl import Invoice, InvoiceLine
