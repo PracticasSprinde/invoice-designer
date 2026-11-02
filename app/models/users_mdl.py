@@ -2,22 +2,19 @@ from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 from app.core.database import Base
 
+
 class User(Base):
     __tablename__ = "users"
 
     user_id: Mapped[int] = mapped_column(primary_key=True)
-    
+
     name: Mapped[str] = mapped_column(String(100))
     last_name: Mapped[str | None] = mapped_column(String(100))
     enterprise: Mapped[str | None] = mapped_column(String(50))
     cif_nif: Mapped[str] = mapped_column(String(25))
-    email: Mapped[str | None] = mapped_column(String (100), unique=True) 
-    phone: Mapped [str | None] = mapped_column(String(25))
+    email: Mapped[str | None] = mapped_column(String(100), unique=True)
+    phone: Mapped[str | None] = mapped_column(String(25))
     address: Mapped[str] = mapped_column(String(150))
-    city: Mapped[str] = mapped_column(String (50))
+    city: Mapped[str] = mapped_column(String(50))
     postal_code: Mapped[str] = mapped_column(String(25))
     country: Mapped[str] = mapped_column(String(100), default="España")
-
-
-
-    

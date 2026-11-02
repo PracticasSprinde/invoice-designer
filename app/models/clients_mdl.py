@@ -2,6 +2,7 @@ from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 from app.core.database import Base
 
+
 class Client(Base):
     __tablename__ = "clients"
 
@@ -19,5 +20,3 @@ class Client(Base):
     country: Mapped[str] = mapped_column(String(100), default="España")
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
-
-
