@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -70,4 +70,34 @@ def delete_template(template_id:int):
 # ================== CONSULTAS BASE DATOS ==================
 
 # Añadir plantilla
-# @router.post("/", response_model=TemplateSchema, summary="Create a new template")
+@router.post("/", response_model=TemplateSchema, summary="Create a new template", status_code=status.HTTP_201_CREATED)
+def create_template(data: TemplateCreate, db: Session = Depends(get_db)):
+    return templates_repo.create_template(data, db)
+
+# Obtener todas las plantillas
+@router.get("/", response_model=list[TemplateSchema], summary="Get list of templates")
+def list_clients(db: Session = Depends(get_db)):
+    return templates_repo.list_templates(db)
+
+# Obtener plantilla por ID
+@router.get("/{templet_id}", response_model=TemplateSchema, summary="Get a template by ID")
+def get_template(template_id: int, db: Session = Depends(get_db)):
+    template = templates_repo.get_template(template_id, db)
+    if template is None:
+        raise HTTPException(status_code=404, detail=f"No template found with ID {template_id}.")
+    return template
+
+# Modificar plantilla
+@router.put("/{template_id}", response_model=TemplateSchema, summary="Update an existing template")
+def update_template(template_id: int,data: TemplateCreate, db: Session = Depends(get_db)):
+    template = templates_repo.update_template(template_id, data, db)
+    if template is None:
+        raise HTTPException(status_code=404, detail=f"Update failed: template with Id {template_id} not found")
+    return template
+
+# Eliminar plantilla
+@router.delete("/{template_id}", summary="Delete a template", status_code=status.HTTP_204_NO_CONTENT)
+def delete_template(template_id: int, db: Session = Depends(get_db)):
+    template = templates_repo.delete_template(template_id, db)
+    if not template:
+        raise HTTPException(status_code=404, detail=f"Deletion failed: template with ID {template_id} not found")
