@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.clients_sch import Client as ClientSchema, ClientCreate
 from app.repositories import clients_repo as clients_repo
-from app.routers.prueba_rt import client_list, find_client
+from tests.memory_storage import client_list, find_client
 
 
 # Define ruta

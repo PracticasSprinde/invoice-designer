@@ -5,7 +5,7 @@ from app.core.database import get_db
 from app.schemas.invoices_sch import Invoice as InvoiceSchema,InvoiceLine,InvoiceCreate,InvoiceTotals
 from app.repositories import invoices_repo as invoices_repo
 from app.services.calculations import calculate_line, calculate_invoice_totals
-from app.routers.prueba_rt import invoice_list, find_invoice
+from tests.memory_storage import invoice_list, find_invoice
 
 # Define ruta
 router = APIRouter(prefix="/invoices", tags=["Invoices"])

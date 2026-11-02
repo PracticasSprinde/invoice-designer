@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.users_sch import User as UserSchema, UserCreate
 from app.repositories import users_repo as users_repo
-from app.routers.prueba_rt import users_list, find_user
+from tests.memory_storage import users_list, find_user
 
 # Define ruta
 router = APIRouter(prefix="/users", tags=["Users"])
