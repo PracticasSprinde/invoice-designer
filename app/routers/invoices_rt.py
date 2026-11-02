@@ -1,16 +1,19 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
+from sqlalchemy.orm import Session
 
-from app.schemas.invoices_sch import InvoiceLine, InvoiceCreate, Invoice, InvoiceTotals
+from app.core.database import get_db
+from app.schemas.invoices_sch import Invoice as InvoiceSchema,InvoiceLine,InvoiceCreate,InvoiceTotals
+from app.repositories import invoices_repo as invoices_repo
 from app.services.calculations import calculate_line, calculate_invoice_totals
 from app.routers.prueba_rt import invoice_list, find_invoice
 
 # Define ruta
 router = APIRouter(prefix="/invoices", tags=["Invoices"])
 router_memory = APIRouter(prefix="/memory/invoices", tags=["Invoices (memory)"])
-
 next_id = 1
 
-# -----------------------------ENDPOINTS-----------------------------
+
+# ================== CONSULTAS API ==================
 
 
 # Calcula los importes sin guardar la factura (vista previa)
@@ -20,7 +23,7 @@ def preview_invoice(data: InvoiceCreate):
 
 
 # Crea una factura: calcula sus líneas y totales y la guarda
-@router_memory.post("/",summary="Create a new invoice",response_model=Invoice,status_code=status.HTTP_201_CREATED,)
+@router_memory.post("/",summary="Create a new invoice",response_model=InvoiceSchema,status_code=status.HTTP_201_CREATED,)
 def create_invoice(data: InvoiceCreate):
     global next_id
 
@@ -46,7 +49,7 @@ def create_invoice(data: InvoiceCreate):
     totals = calculate_invoice_totals(data.lines, data.global_discount_percent)
 
     # Construye factura y la guarda
-    invoice = Invoice(
+    invoice = InvoiceSchema(
         **data.model_dump(exclude={"lines"}),
         invoice_id=next_id,
         lines=invoice_lines,
@@ -68,9 +71,7 @@ def get_invoices():
 
 
 # Obtener factura por ID
-@router_memory.get(
-    "/{invoice_id}", summary="Get an invoice by ID", response_model=Invoice
-)
+@router_memory.get("/{invoice_id}", summary="Get an invoice by ID", response_model=InvoiceSchema)
 def get_invoice(invoice_id: int):
     invoice = find_invoice(invoice_id)
 
@@ -83,9 +84,7 @@ def get_invoice(invoice_id: int):
 
 
 # Modificar factura
-@router_memory.put(
-    "/{invoice_id}", summary="Update an existing invoice", response_model=Invoice
-)
+@router_memory.put("/{invoice_id}", summary="Update an existing invoice", response_model=InvoiceSchema)
 def update_invoice(invoice_id: int, data: InvoiceCreate):
     invoice = find_invoice(invoice_id)
 
@@ -117,7 +116,7 @@ def update_invoice(invoice_id: int, data: InvoiceCreate):
     totals = calculate_invoice_totals(data.lines, data.global_discount_percent)
 
     # Construye factura y la guarda
-    updated = Invoice(
+    updated = InvoiceSchema(
         **data.model_dump(exclude={"lines"}),
         invoice_id=invoice_id,
         lines=invoice_lines,
@@ -131,9 +130,7 @@ def update_invoice(invoice_id: int, data: InvoiceCreate):
 
 
 # Eliminar factura
-@router_memory.delete(
-    "/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT
-)
+@router_memory.delete("/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT)
 def delete_invoice(invoice_id: int):
     invoice = find_invoice(invoice_id)
 
@@ -144,3 +141,57 @@ def delete_invoice(invoice_id: int):
         )
 
     invoice_list.remove(invoice)
+
+
+# ================== CONSULTAS BASE DATOS ==================
+
+
+# Añadir factura
+@router.post("/",response_model=InvoiceSchema,summary="Create a new invoice",status_code=status.HTTP_201_CREATED,)
+def create_invoice(data: InvoiceCreate, db: Session = Depends(get_db)):
+    return invoices_repo.create_invoice(data, db)
+
+
+# Obtener todas las facturas
+@router.get("/", response_model=list[InvoiceSchema], summary="Get list of invoices")
+def list_invoices(db: Session = Depends(get_db)):
+    return invoices_repo.list_invoices(db)
+
+
+# Obtener factura por ID
+@router.get("/{invoice_id}", response_model=InvoiceSchema, summary="Get an invoice for ID")
+def get_invoice(invoice_id: int, db: Session = Depends(get_db)):
+    invoice = invoices_repo.get_invoice(invoice_id, db)
+
+    if invoice is None:
+        raise HTTPException(
+            status_code=404, 
+            detail=f"No invoice found with ID {invoice_id}."
+        )
+
+    return invoice
+
+
+# Modificar factura
+@router.put("/{invoice_id}", response_model=InvoiceSchema, summary="Update an existing invoice")
+def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session = Depends(get_db)):
+    invoice = invoices_repo.update_invoice(invoice_id, data,db)
+
+    if invoice is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Update failed: invoice with ID {invoice_id} not found",
+        )
+
+    return invoice
+
+
+# Eliminar factura
+@router.delete("/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT)
+def delete_invoice(invoice_id: int, db: Session = Depends(get_db)):
+    invoice = invoices_repo.delete_invoice(invoice_id, db)
+    if not invoice:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Deletion failed: invoice with ID {invoice_id} not found",
+        )

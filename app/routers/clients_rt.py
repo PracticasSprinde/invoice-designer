@@ -6,6 +6,7 @@ from app.schemas.clients_sch import Client as ClientSchema, ClientCreate
 from app.repositories import clients_repo as clients_repo
 from app.routers.prueba_rt import client_list, find_client
 
+
 # Define ruta
 router = APIRouter(prefix="/clients", tags=["Clients"])
 router_memory = APIRouter(prefix="/memory/clients", tags=["Clients (memory)"])
@@ -79,7 +80,7 @@ def delete_client(client_id: int):
 
 
 # Añadir cliente
-@router.post("/",response_model=ClientSchema,summary="Create a new client",status_code=status.HTTP_201_CREATED,)
+@router.post("/", response_model=ClientSchema, summary="Create a new client", status_code=status.HTTP_201_CREATED)
 def create_client(data: ClientCreate, db: Session = Depends(get_db)):
     return clients_repo.create_client(data, db)
 
@@ -106,7 +107,7 @@ def get_client(client_id: int, db: Session = Depends(get_db)):
 
 # Modificar cliente
 @router.put("/{client_id}", response_model=ClientSchema, summary="Update an existing client")
-async def update_client(client_id: int, data: ClientCreate, db: Session = Depends(get_db)):
+def update_client(client_id: int, data: ClientCreate, db: Session = Depends(get_db)):
     client = clients_repo.update_client(client_id, data, db)
    
     if client is None:

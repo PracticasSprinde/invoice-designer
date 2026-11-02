@@ -10,7 +10,9 @@ from app.routers.prueba_rt import users_list, find_user
 router = APIRouter(prefix="/users", tags=["Users"])
 router_memory = APIRouter(prefix="/memory/users", tags=["Users (memory)"])
 
+
 # ================== CONSULTAS API ==================
+
 
 # Añadir usuario
 @router_memory.post("/", summary="Create a new user", status_code=status.HTTP_201_CREATED)
@@ -82,6 +84,7 @@ def delete_user(user_id: int):
 
 # ================== CONSULTAS BASE DATOS ==================
 
+
 # Añadir usuario
 @router.post("/", response_model=UserSchema, status_code=status.HTTP_201_CREATED)
 def create_user(data: UserCreate, db: Session = Depends(get_db)):
@@ -120,6 +123,7 @@ def update_user(user_id: int, data: UserCreate, db: Session = Depends(get_db)):
         )
     
     return user
+
 
 # Eliminar usuario
 @router.delete("/{user_id}", summary="Delete a user", status_code=status.HTTP_204_NO_CONTENT)

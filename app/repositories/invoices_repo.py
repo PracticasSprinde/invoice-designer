@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from app.models.invoices_mdl import InvoiceLine, Invoice
-from app.schemas.invoices_sch import InvoiceLineCreate, InvoiceCreate
+from app.schemas.invoices_sch import InvoiceCreate
 from app.services.calculations import calculate_invoice_totals, calculate_line
 
 

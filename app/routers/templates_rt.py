@@ -91,6 +91,7 @@ def delete_template(template_id:int):
 
 # ================== CONSULTAS BASE DATOS ==================
 
+
 # Añadir plantilla
 @router.post("/", response_model=TemplateSchema, summary="Create a new template", status_code=status.HTTP_201_CREATED)
 def create_template(data: TemplateCreate, db: Session = Depends(get_db)):
