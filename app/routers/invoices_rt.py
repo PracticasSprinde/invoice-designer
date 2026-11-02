@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 
 from app.schemas.invoices_sch import InvoiceLine, InvoiceCreate, Invoice, InvoiceTotals
-from app.services.calculations import calculate_line,calculate_invoice_totals
+from app.services.calculations import calculate_line, calculate_invoice_totals
 from app.routers.prueba_rt import invoice_list, find_invoice
 
 # Define ruta
@@ -12,6 +12,7 @@ next_id = 1
 
 # -----------------------------ENDPOINTS-----------------------------
 
+
 # Calcula los importes sin guardar la factura (vista previa)
 @router_memory.post("/preview", summary="Create a preview invoice", response_model=InvoiceTotals)
 def preview_invoice(data: InvoiceCreate):
@@ -19,21 +20,26 @@ def preview_invoice(data: InvoiceCreate):
 
 
 # Crea una factura: calcula sus líneas y totales y la guarda
-@router_memory.post("/", summary="Create a new invoice", response_model=Invoice, status_code=status.HTTP_201_CREATED)
+@router_memory.post("/",summary="Create a new invoice",response_model=Invoice,status_code=status.HTTP_201_CREATED,)
 def create_invoice(data: InvoiceCreate):
     global next_id
 
     # No permite numero de factura repetido
     for invoice in invoice_list:
         if invoice.number == data.number:
-            raise HTTPException(status_code=409, detail=f"Creation failed: invoice with ID {invoice.invoice_id} already exists.")
+            raise HTTPException(
+                status_code=409,
+                detail=f"Creation failed: invoice with ID {invoice.invoice_id} already exists.",
+            )
 
     # Calculo de la línea
     invoice_lines = []
     for line in data.lines:
         line_amount, lines_tax = calculate_line(line, data.global_discount_percent)
         invoice_lines.append(
-            InvoiceLine(**line.model_dump(), line_amount=line_amount, tax_amount=lines_tax)
+            InvoiceLine(
+                **line.model_dump(), line_amount=line_amount, tax_amount=lines_tax
+            )
         )
 
     # Calculo de los totales de la factura
@@ -44,49 +50,69 @@ def create_invoice(data: InvoiceCreate):
         **data.model_dump(exclude={"lines"}),
         invoice_id=next_id,
         lines=invoice_lines,
-        **totals, # Añade las claves y valores al diccionario invoice
+        **totals,  # Añade las claves y valores al diccionario invoice
     )
-    next_id +=1
+
+    next_id += 1
     invoice_list.append(invoice)
     return invoice
+
 
 # Obtener todas las facturas
 @router_memory.get("/", summary="Get list of invoices")
 def get_invoices():
     if not invoice_list:
-            raise HTTPException(status_code=404, detail="No registered invoices found.")
+        raise HTTPException(status_code=404, detail="No registered invoices found.")
+
     return invoice_list
 
 
 # Obtener factura por ID
-@router_memory.get("/{invoice_id}", summary="Get an invoice by ID", response_model=Invoice)
+@router_memory.get(
+    "/{invoice_id}", summary="Get an invoice by ID", response_model=Invoice
+)
 def get_invoice(invoice_id: int):
     invoice = find_invoice(invoice_id)
+
     if invoice is None:
-        raise HTTPException(status_code=404, detail=f"No invoice found with ID {invoice_id}.")
+        raise HTTPException(
+            status_code=404, detail=f"No invoice found with ID {invoice_id}."
+        )
+
     return invoice
 
 
 # Modificar factura
-@router_memory.put("/{invoice_id}", summary="Update an existing invoice", response_model=Invoice)
+@router_memory.put(
+    "/{invoice_id}", summary="Update an existing invoice", response_model=Invoice
+)
 def update_invoice(invoice_id: int, data: InvoiceCreate):
     invoice = find_invoice(invoice_id)
+
     if invoice is None:
-        raise HTTPException(status_code=404, detail=f"Update failed: invoice with ID {invoice_id} not found.")
-    
+        raise HTTPException(
+            status_code=404,
+            detail=f"Update failed: invoice with ID {invoice_id} not found.",
+        )
+
     # No permite numero de factura repetido
     for saved in invoice_list:
         if saved.number == data.number and saved.invoice_id != invoice_id:
-            raise HTTPException(status_code=409, detail=f"Update failed: an invoice with number '{data.number}' already exists.")
-    
-     # Calculo de la línea
+            raise HTTPException(
+                status_code=409,
+                detail=f"Update failed: an invoice with number '{data.number}' already exists.",
+            )
+
+    # Calculo de la línea
     invoice_lines = []
     for line in data.lines:
         line_amount, lines_tax = calculate_line(line, data.global_discount_percent)
         invoice_lines.append(
-            InvoiceLine(**line.model_dump(), line_amount=line_amount, tax_amount=lines_tax)
+            InvoiceLine(
+                **line.model_dump(), line_amount=line_amount, tax_amount=lines_tax
+            )
         )
-    
+
     # Calculo de los totales de la factura
     totals = calculate_invoice_totals(data.lines, data.global_discount_percent)
 
@@ -95,7 +121,7 @@ def update_invoice(invoice_id: int, data: InvoiceCreate):
         **data.model_dump(exclude={"lines"}),
         invoice_id=invoice_id,
         lines=invoice_lines,
-        **totals
+        **totals,
     )
 
     # Sustituye factura antigua por nueva
@@ -105,9 +131,16 @@ def update_invoice(invoice_id: int, data: InvoiceCreate):
 
 
 # Eliminar factura
-@router_memory.delete("/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT)
-def delete_invoice(invoice_id:int):
+@router_memory.delete(
+    "/{invoice_id}", summary="Delete an invoice", status_code=status.HTTP_204_NO_CONTENT
+)
+def delete_invoice(invoice_id: int):
     invoice = find_invoice(invoice_id)
+
     if invoice is None:
-        raise HTTPException(status_code=404, detail=f"Deletion failed: invoice with ID {invoice_id} not found.")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Deletion failed: invoice with ID {invoice_id} not found.",
+        )
+
     invoice_list.remove(invoice)

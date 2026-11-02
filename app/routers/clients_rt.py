@@ -6,18 +6,22 @@ from app.schemas.clients_sch import Client as ClientSchema, ClientCreate
 from app.repositories import clients_repo as clients_repo
 from app.routers.prueba_rt import client_list, find_client
 
-
 # Define ruta
 router = APIRouter(prefix="/clients", tags=["Clients"])
 router_memory = APIRouter(prefix="/memory/clients", tags=["Clients (memory)"])
 
 # ================== CONSULTAS API ==================
 
+
 # Añadir cliente
-@router_memory.post("/", summary="Create a new client" ,status_code=status.HTTP_201_CREATED)
-def create_client(client : ClientSchema):
+@router_memory.post("/", summary="Create a new client", status_code=status.HTTP_201_CREATED)
+def create_client(client: ClientSchema):
     if find_client(client.client_id):
-        raise HTTPException(status_code=409, detail=f"Creation failed: client with ID {client.client_id} already exists")
+        raise HTTPException(
+            status_code=409,
+            detail=f"Creation failed: client with ID {client.client_id} already exists",
+        )
+    
     client_list.append(client)
     return client
 
@@ -27,6 +31,7 @@ def create_client(client : ClientSchema):
 def get_clients():
     if not client_list:
         raise HTTPException(status_code=404, detail="No registered clients found.")
+    
     return client_list
 
 
@@ -34,36 +39,48 @@ def get_clients():
 @router_memory.get("/{client_id}", summary="Get a client by ID")
 def get_client(client_id: int):
     client = find_client(client_id)
+    
     if client is None:
         raise HTTPException(status_code=404, detail=f"No client found with ID {client_id}.")
+    
     return client
 
 
 # Modificar cliente
 @router_memory.put("/{client_id}", summary="Update an existing client")
-def update_client(client_id : int, client:ClientSchema):
+def update_client(client_id: int, client: ClientSchema):
     for index, saved in enumerate(client_list):
         if saved.client_id == client_id:
             client.client_id = client_id
             client_list[index] = client
             return client
-    raise HTTPException(status_code=404, detail=f"Update failed: client with ID {client_id} not found")
+    
+    raise HTTPException(
+        status_code=404, 
+        detail=f"Update failed: client with ID {client_id} not found"
+    )
 
 
 # Eliminar cliente
-@router_memory.delete("/{client_id}", summary="Delete a client" ,status_code=status.HTTP_204_NO_CONTENT)
-def delete_client(client_id : int):
+@router_memory.delete("/{client_id}", summary="Delete a client", status_code=status.HTTP_204_NO_CONTENT)
+def delete_client(client_id: int):
     client = find_client(client_id)
+    
     if client is None:
-        raise HTTPException(status_code=404, detail=f"Deletion failed: client with ID {client_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Deletion failed: client with ID {client_id} not found",
+        )
+    
     client_list.remove(client)
 
 
 # ================== CONSULTAS BASE DATOS ==================
 
+
 # Añadir cliente
-@router.post("/", response_model=ClientSchema, summary="Create a new client" ,status_code=status.HTTP_201_CREATED)
-def create_client(data : ClientCreate, db:Session = Depends(get_db)):
+@router.post("/",response_model=ClientSchema,summary="Create a new client",status_code=status.HTTP_201_CREATED,)
+def create_client(data: ClientCreate, db: Session = Depends(get_db)):
     return clients_repo.create_client(data, db)
 
 
@@ -77,24 +94,37 @@ def list_clients(db: Session = Depends(get_db)):
 @router.get("/{client_id}", response_model=ClientSchema, summary="Get a client by ID")
 def get_client(client_id: int, db: Session = Depends(get_db)):
     client = clients_repo.get_client(client_id, db)
+    
     if client is None:
-        raise HTTPException(status_code=404, detail=f"No client found with ID {client_id}.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"No client found with ID {client_id}."
+        )
+    
     return client
-
 
 
 # Modificar cliente
 @router.put("/{client_id}", response_model=ClientSchema, summary="Update an existing client")
-async def update_client(client_id : int, data:ClientCreate, db:Session = Depends(get_db)):
+async def update_client(client_id: int, data: ClientCreate, db: Session = Depends(get_db)):
     client = clients_repo.update_client(client_id, data, db)
+   
     if client is None:
-        raise HTTPException(status_code=404, detail=f"Update failed: client with ID {client_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Update failed: client with ID {client_id} not found",
+        )
+    
     return client
 
 
 # Eliminar cliente
-@router.delete("/{client_id}", summary="Delete a client" ,status_code=status.HTTP_204_NO_CONTENT)
-def delete_client(client_id : int, db:Session = Depends(get_db), ):
+@router.delete("/{client_id}", summary="Delete a client", status_code=status.HTTP_204_NO_CONTENT)
+def delete_client( client_id: int,db: Session = Depends(get_db),):
     client = clients_repo.delete_client(client_id, db)
+    
     if not client:
-        raise HTTPException(status_code=404, detail=f"Deletion failed: client with ID {client_id} not found")
+        raise HTTPException(
+            status_code=404,
+            detail=f"Deletion failed: client with ID {client_id} not found",
+        )

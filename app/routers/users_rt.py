@@ -16,7 +16,11 @@ router_memory = APIRouter(prefix="/memory/users", tags=["Users (memory)"])
 @router_memory.post("/", summary="Create a new user", status_code=status.HTTP_201_CREATED)
 def create_user(user : UserSchema):
     if find_user(user.user_id):
-        raise HTTPException(status_code=409, detail=f"Creation failed: user with ID {user.user_id} already exists.")
+        raise HTTPException(
+            status_code=409, 
+            detail=f"Creation failed: user with ID {user.user_id} already exists."
+        )
+    
     users_list.append(user)
     return user
 
@@ -25,7 +29,11 @@ def create_user(user : UserSchema):
 @router_memory.get("/", summary="Get list of users")
 def get_users():
     if not users_list:
-        raise HTTPException(status_code=404, detail="No registered users found.")
+        raise HTTPException(
+            status_code=404, 
+            detail="No registered users found."
+        )
+    
     return users_list
 
 
@@ -33,8 +41,13 @@ def get_users():
 @router_memory.get("/{user_id}", summary="Get a user by ID")
 def get_user(user_id:int):
     user = find_user(user_id)
+   
     if user is None:
-        raise HTTPException(status_code=404, detail=f"No user found with ID {user_id}.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"No user found with ID {user_id}."
+        )
+    
     return user
 
 
@@ -46,15 +59,24 @@ def update_user(user_id: int, user:UserSchema):
             user.user_id = user_id
             users_list[index] = user
             return user
-    raise HTTPException(status_code=404, detail=f"Update failed: user with ID {user_id} not found.")
+    
+    raise HTTPException(
+        status_code=404, 
+        detail=f"Update failed: user with ID {user_id} not found."
+    )
 
 
 # Eliminar usuario
 @router_memory.delete("/{user_id}", summary="Delete a user", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(user_id: int):
     user = find_user(user_id)
+    
     if user is None:
-        raise HTTPException(status_code=404, detail=f"Deletion failed: user with ID {user_id} not found.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"Deletion failed: user with ID {user_id} not found."
+        )
+    
     users_list.remove(user)
 
 
@@ -76,8 +98,13 @@ def list_users(db: Session = Depends(get_db)):
 @router.get("/{user_id}", response_model= UserSchema, summary="Get a user by ID")
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = users_repo.get_user(user_id, db)
+    
     if user is None:
-        raise HTTPException(status_code=404, detail=f"No user found with ID {user_id}.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"No user found with ID {user_id}."
+        )
+    
     return user
 
 
@@ -85,13 +112,22 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 @router.put("/{user_id}", response_model= UserSchema, summary="Update an existing user")
 def update_user(user_id: int, data: UserCreate, db: Session = Depends(get_db)):
     user = users_repo.update_user(user_id, data, db)
+    
     if user is None:
-        raise HTTPException(status_code=404, detail=f"Update failed: user with ID {user_id} not found.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"Update failed: user with ID {user_id} not found."
+        )
+    
     return user
 
 # Eliminar usuario
 @router.delete("/{user_id}", summary="Delete a user", status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(user_id: int, db: Session = Depends(get_db)):
     user = users_repo.delete_user(user_id, db)
+    
     if not user:
-        raise HTTPException(status_code=404, detail=f"Deletion failed: user with ID {user_id} not found.")
+        raise HTTPException(
+            status_code=404, 
+            detail=f"Deletion failed: user with ID {user_id} not found."
+        )
