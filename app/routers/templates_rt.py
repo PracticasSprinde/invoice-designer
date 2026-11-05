@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.templates_sch import Template as TemplateSchema, TemplateCreate
 from app.repositories import templates_repo as templates_repo
-from tests.test_repo import template_list, find_template
+from tests.memory_storage import template_list, find_template
 
 
 # Define ruta

@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from app.models.products_mdl import Product
-from app.schemas.product_sch import ProductCreate
+from app.schemas.products_sch import ProductCreate
 
 
 # Añadir producto en la base de datos

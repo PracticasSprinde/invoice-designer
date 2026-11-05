@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.schemas.product_sch import Product as ProductSchema, ProductCreate
-from app.repositories import products as products_repo
+from app.schemas.products_sch import Product as ProductSchema, ProductCreate
+from app.repositories import products_repo as products_repo
 from tests.memory_storage import product_list, find_product
 
 # Define ruta
