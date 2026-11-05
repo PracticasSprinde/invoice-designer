@@ -29,7 +29,7 @@ def create_product(product : ProductSchema):
 
 # Obtener todos los usuarios
 @router_memory.get("/", summary="Get list of products")
-def get_users():
+def get_products():
     if not product_list:
         raise HTTPException(
             status_code=404, 
@@ -99,8 +99,8 @@ def list_products(db: Session = Depends(get_db)):
 
 # Obtener usuario por ID
 @router.get("/{product_id}", response_model= ProductSchema, summary="Get a product by ID")
-def get_user(product_id: int, db: Session = Depends(get_db)):
-    product = products_repo.get_user(product_id, db)
+def get_product(product_id: int, db: Session = Depends(get_db)):
+    product = products_repo.get_product(product_id, db)
     
     if product is None:
         raise HTTPException(
@@ -114,7 +114,7 @@ def get_user(product_id: int, db: Session = Depends(get_db)):
 # Modificar usuario
 @router.put("/{product_id}", response_model= ProductSchema, summary="Update an existing product")
 def update_product(product_id: int, data: ProductCreate, db: Session = Depends(get_db)):
-    product = products_repo.update_user(product_id, data, db)
+    product = products_repo.update_product(product_id, data, db)
     
     if product is None:
         raise HTTPException(
@@ -128,7 +128,7 @@ def update_product(product_id: int, data: ProductCreate, db: Session = Depends(g
 # Eliminar usuario
 @router.delete("/{product_id}", summary="Delete a product", status_code=status.HTTP_204_NO_CONTENT)
 def delete_product(product_id: int, db: Session = Depends(get_db)):
-    product = products_repo.delete_user(product_id, db)
+    product = products_repo.delete_product(product_id, db)
     
     if not product:
         raise HTTPException(
