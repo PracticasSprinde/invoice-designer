@@ -46,7 +46,7 @@ class InvoiceLine(Base):
 
     line_id: Mapped[int] = mapped_column(primary_key=True)
     invoice_id: Mapped[int] = mapped_column(ForeignKey("invoices.invoice_id"))
-    product_id: Mapped[int | None] = mapped_column(ForeignKey("product.product_id"))
+    product_id: Mapped[int | None] = mapped_column(ForeignKey("product.product_id", ondelete="SET NULL"))
 
     quantity: Mapped[Decimal] = mapped_column(Numeric(10, 2))
     discount_percent: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=Decimal("0"))
@@ -54,4 +54,4 @@ class InvoiceLine(Base):
     tax_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
 
     invoice: Mapped["Invoice"] = relationship(back_populates="lines")
-    product: Mapped["Product"] = relationship()
+    product: Mapped["Product" | None] = relationship()
