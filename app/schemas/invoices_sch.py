@@ -14,8 +14,11 @@ class InvoiceLineCreate(BaseModel):
 # Línea de factura con los importes calculados de la linea y la cuota de IVA de la linea
 class InvoiceLine(InvoiceLineCreate):
     line_id: int
+    product_id: int | None
+    description: str
+    unit_price: Decimal
+    tax_rate: Decimal
     line_amount: Decimal
-    tax_amount: Decimal
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -36,8 +39,11 @@ class Invoice(InvoiceCreate):
     invoice_id: int
     subtotal: Decimal
     discount_amount: Decimal
+    taxable_base: Decimal
     tax_amount: Decimal
     total: Decimal
+    base_breakdown: dict[str, str]
+    tax_breakdown: dict[str, str]
     lines: list[InvoiceLine] = Field(min_length=1)  # Mínimo una línea
     model_config = ConfigDict(from_attributes=True)
 

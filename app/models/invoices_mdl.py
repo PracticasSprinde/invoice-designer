@@ -1,4 +1,4 @@
-from sqlalchemy import String, ForeignKey, Numeric, Text
+from sqlalchemy import String, ForeignKey, Numeric, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -30,8 +30,13 @@ class Invoice(Base):
 
     subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     discount_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    taxable_base: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     tax_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     total: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+
+    # Desglose de bases imponibles e IVA
+    base_breakdown: Mapped[dict] = mapped_column(JSON)
+    tax_breakdown: Mapped[dict] = mapped_column(JSON)
 
     lines: Mapped[list["InvoiceLine"]] = relationship(
         back_populates="invoice", cascade="all, delete-orphan"
@@ -48,10 +53,15 @@ class InvoiceLine(Base):
     invoice_id: Mapped[int] = mapped_column(ForeignKey("invoices.invoice_id"))
     product_id: Mapped[int | None] = mapped_column(ForeignKey("product.product_id", ondelete="SET NULL"))
 
+    # Copia de los datos del producto al crear la factura
+    description: Mapped[str] = mapped_column(String(250))
+    unit_price: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    tax_rate: Mapped[Decimal] = mapped_column(Numeric(5, 2))
+
+    # Datos de la línea
     quantity: Mapped[Decimal] = mapped_column(Numeric(10, 2))
     discount_percent: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=Decimal("0"))
     line_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
-    tax_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
 
     invoice: Mapped["Invoice"] = relationship(back_populates="lines")
-    product: Mapped["Product" | None] = relationship()
+    product: Mapped[Product | None] = relationship()

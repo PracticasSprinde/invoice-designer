@@ -149,7 +149,10 @@ def delete_invoice(invoice_id: int):
 # Añadir factura
 @router.post("/",response_model=InvoiceSchema,summary="Create a new invoice",status_code=status.HTTP_201_CREATED,)
 def create_invoice(data: InvoiceCreate, db: Session = Depends(get_db)):
-    return invoices_repo.create_invoice(data, db)
+    try:
+        return invoices_repo.create_invoice(data, db)
+    except ValueError as error:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail=str(error))
 
 
 # Obtener todas las facturas
@@ -175,15 +178,23 @@ def get_invoice(invoice_id: int, db: Session = Depends(get_db)):
 # Modificar factura
 @router.put("/{invoice_id}", response_model=InvoiceSchema, summary="Update an existing invoice")
 def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session = Depends(get_db)):
-    invoice = invoices_repo.update_invoice(invoice_id, data,db)
+    try:
+        invoice = invoices_repo.update_invoice(invoice_id, data, db)
 
-    if invoice is None:
+        if invoice is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Update failed: invoice with ID {invoice_id} not found",
+            )
+
+        return invoice
+    
+    except ValueError as error:
         raise HTTPException(
-            status_code=404,
-            detail=f"Update failed: invoice with ID {invoice_id} not found",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(error)
         )
 
-    return invoice
 
 
 # Eliminar factura
