@@ -2,6 +2,7 @@ from app.models.users_mdl import User
 from app.models.clients_mdl import Client
 from app.models.templates_mdl import Template
 from app.models.invoices_mdl import Invoice
+from app.models.product_mdl import Product
 
 
 # ================== PRUEBAS USUARIOS ==================
@@ -20,6 +21,7 @@ def find_user(user_id: int) -> User | None:
     users_list if i.user_id == user_id), None)
 
 
+
 # ================== PRUEBAS CLIENTES ==================
 
 # Lista de clientes
@@ -34,6 +36,23 @@ client_list = [
 # Devuelve el primer cliente que coincida con el ID
 def find_client(client_id: int) -> Client | None:
     return next((c for c in client_list if c.client_id == client_id), None)
+
+
+
+# ================== PRUEBAS PRODUCTOS ==================
+
+# Lista de productos
+product_list = [
+    Product(product_id=1, code="PROD-001", name="Portátil HP", description="Portátil de 15.6 pulgadas con 16GB RAM", category="Informática", unit_price=Decimal("750.00"), tax_rate=Decimal("21.00"), user_id=1),
+    Product(product_id=2, code="PROD-002", name="Ratón inalámbrico", description="Ratón óptico ergonómico USB", category="Periféricos", unit_price=Decimal("25.50"), tax_rate=Decimal("21.00"), user_id=1),
+    Product(product_id=3, code="PROD-003", name="Monitor 27\"", description="Monitor LED Full HD 75Hz", category="Informática", unit_price=Decimal("180.00"), tax_rate=Decimal("21.00"), user_id=1),
+    Product(product_id=4, code="PROD-004", name="Teclado mecánico", description="Teclado RGB con switches red", category="Periféricos", unit_price=Decimal("60.25"), tax_rate=Decimal("21.00"), user_id=1)
+]
+
+# Devuelve el primer usuario que coincida con el ID
+def find_product(product_id: int) -> Product | None:
+    return next((i for i in
+    product_list if i.product_id == product_id), None)
 
 
 # ================== PRUEBAS PLANTILLAS ==================
