@@ -91,7 +91,7 @@ def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session) -> Invoice
         return None
 
     # Actualiza datos
-    for field, value in data.model_dump(exclude={"lines"}).items():
+    for field, value in data.model_dump(exclude={"lines", "user_id"}).items():
         setattr(invoice, field, value)
 
     # Eliminar las líneas anteriores
