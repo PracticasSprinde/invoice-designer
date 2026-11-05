@@ -6,17 +6,14 @@ from typing import Any
 
 # Modelo para los datos de cada línea de la factura
 class InvoiceLineCreate(BaseModel):
-    category: str | None = Field(default=None, max_length=50)
-    description: str = Field(min_length=1, max_length=250)
-    extra: dict[str, Any] = {}
-    unit_price: Decimal = Field(ge=0)
+    product_id: int
     quantity: Decimal = Field(gt=0)
     discount_percent: Decimal = Field(default=Decimal("0"), ge=0, le=100)
-    tax_rate: Decimal = Field(default=Decimal("21"), ge=0, le=100)  # 21% IVA
 
 
 # Línea de factura con los importes calculados de la linea y la cuota de IVA de la linea
 class InvoiceLine(InvoiceLineCreate):
+    line_id: int
     line_amount: Decimal
     tax_amount: Decimal
     model_config = ConfigDict(from_attributes=True)

@@ -1,6 +1,12 @@
-from sqlalchemy import String, ForeignKey, Numeric, Text, JSON
+from sqlalchemy import String, ForeignKey, Numeric, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from app.core.database import Base
+from app.models.users_mdl import User
+from app.models.clients_mdl import Client
+from app.models.products_mdl import Product
+from app.models.templates_mdl import Template
+
 from datetime import date
 from decimal import Decimal
 
@@ -13,6 +19,7 @@ class Invoice(Base):
     number: Mapped[str] = mapped_column(String(30))
     issue_date: Mapped[date] = mapped_column(default=date.today)
     notes: Mapped[str | None] = mapped_column(Text)
+
     global_discount_percent: Mapped[Decimal] = mapped_column(
         Numeric(5, 2), default=Decimal("0")
     )
@@ -39,17 +46,12 @@ class InvoiceLine(Base):
 
     line_id: Mapped[int] = mapped_column(primary_key=True)
     invoice_id: Mapped[int] = mapped_column(ForeignKey("invoices.invoice_id"))
+    product_id: Mapped[int | None] = mapped_column(ForeignKey("product.product_id"))
 
-    category: Mapped[str | None] = mapped_column(String(50))
-    description: Mapped[str] = mapped_column(String(250))
-    extra: Mapped[dict] = mapped_column(JSON, default=dict)
-    unit_price: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     quantity: Mapped[Decimal] = mapped_column(Numeric(10, 2))
-    discount_percent: Mapped[Decimal] = mapped_column(
-        Numeric(5, 2), default=Decimal("0")
-    )
-    tax_rate: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=Decimal("21"))
+    discount_percent: Mapped[Decimal] = mapped_column(Numeric(5, 2), default=Decimal("0"))
     line_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     tax_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
 
     invoice: Mapped["Invoice"] = relationship(back_populates="lines")
+    product: Mapped["Product"] = relationship()

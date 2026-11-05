@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
-from app.models.product_mdl import Product
+from app.models.products_mdl import Product
 from app.schemas.product_sch import ProductCreate
 
 
