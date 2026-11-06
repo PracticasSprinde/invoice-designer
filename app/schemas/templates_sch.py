@@ -7,7 +7,7 @@ from typing import Any  # Cualquier tipo
 class TemplateCreate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
     layout: dict[str, Any] = {}  # Opcional
-    user_id: int
+    issuer_id: int
 
 
 # Hereda de TemplateCreate

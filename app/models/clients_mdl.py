@@ -19,4 +19,4 @@ class Client(Base):
     postal_code: Mapped[str] = mapped_column(String(25))
     country: Mapped[str] = mapped_column(String(100), default="España")
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
+    issuer_id: Mapped[int] = mapped_column(ForeignKey("issuer.issuer_id"))

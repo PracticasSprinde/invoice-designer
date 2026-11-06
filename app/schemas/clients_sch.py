@@ -12,7 +12,7 @@ class ClientCreate(BaseModel):
     city: str = Field(min_length=1, max_length=50)
     postal_code: str = Field(min_length=1, max_length=25)
     country: str = Field(default="España", min_length=1, max_length=100)
-    user_id: int
+    issuer_id: int
 
 
 class Client(ClientCreate):

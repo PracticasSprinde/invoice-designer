@@ -56,8 +56,8 @@ finally:
 # PRUEBA 3: PERSISTENCIA DE DATOS
 print("\n--- PRUEBA DE PERSISTENCIA ---")
 
-from app.repositories import users_repo as users
-from app.schemas.users_sch import UserCreate
+from app.repositories import issuer_repo as users
+from app.schemas.issuer_sch import UserCreate
 
 db = SessionLocal()
 

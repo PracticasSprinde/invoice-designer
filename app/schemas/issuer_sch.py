@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 
 
-class UserCreate(BaseModel):
+class IssuerCreate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
     last_name: str | None = Field(default=None, min_length=1, max_length=100)
     enterprise: str | None = Field(default=None, min_length=1, max_length=50)
@@ -14,6 +14,6 @@ class UserCreate(BaseModel):
     country: str = Field(default="España", min_length=1, max_length=100)
 
 
-class User(UserCreate):
-    user_id: int
+class Issuer(IssuerCreate):
+    issuer_id: int
     model_config = ConfigDict(from_attributes=True)

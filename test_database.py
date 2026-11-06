@@ -1,7 +1,7 @@
 
 from app.core.database import SessionLocal
-from app.schemas.users_sch import UserCreate
-from app.repositories import users_repo as users
+from app.schemas.issuer_sch import UserCreate
+from app.repositories import issuer_repo as users
 from app.schemas.clients_sch import ClientCreate
 from app.repositories import clients_repo as clients
 from app.schemas.templates_sch import TemplateCreate

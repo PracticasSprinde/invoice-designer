@@ -2,7 +2,7 @@ from sqlalchemy import String, ForeignKey, Numeric, Text, JSON
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
-from app.models.users_mdl import User
+from app.models.issuer_mdl import Issuer
 from app.models.clients_mdl import Client
 from app.models.products_mdl import Product
 from app.models.templates_mdl import Template
@@ -25,7 +25,7 @@ class Invoice(Base):
     )
 
     client_id: Mapped[int] = mapped_column(ForeignKey("clients.client_id"))
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
+    issuer_id: Mapped[int] = mapped_column(ForeignKey("issuers.issuer_id"))
     template_id: Mapped[int | None] = mapped_column(ForeignKey("templates.template_id"))
 
     subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2))
@@ -41,7 +41,7 @@ class Invoice(Base):
     lines: Mapped[list["InvoiceLine"]] = relationship(
         back_populates="invoice", cascade="all, delete-orphan"
     )
-    user: Mapped["User"] = relationship()
+    issuer: Mapped["Issuer"] = relationship()
     client: Mapped["Client"] = relationship()
     template: Mapped["Template | None"] = relationship()
 

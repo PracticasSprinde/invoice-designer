@@ -14,4 +14,4 @@ class Template(Base):
     name: Mapped[str] = mapped_column(String(100))
     layout: Mapped[dict] = mapped_column(JSON, default=dict)
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
+    issuer_id: Mapped[int] = mapped_column(ForeignKey("issuer.issuer_id"))

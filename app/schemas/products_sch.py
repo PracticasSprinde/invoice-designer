@@ -10,7 +10,7 @@ class ProductCreate(BaseModel):
     unit_price: Decimal = Field(ge=0)
     tax_rate: Decimal = Field(default=Decimal("21"), ge=0, le=100)
 
-    user_id: int
+    issuer_id: int
 
 
 class Product(ProductCreate):

@@ -16,5 +16,5 @@ class Product(Base):
     unit_price: Mapped[Decimal] = mapped_column(Numeric(12,2))
     tax_rate: Mapped[Decimal] = mapped_column(Numeric(5,2), default=Decimal("21"))
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.user_id"))
+    issuer_id: Mapped[int] = mapped_column(ForeignKey("issuer.issuer_id"))
     
