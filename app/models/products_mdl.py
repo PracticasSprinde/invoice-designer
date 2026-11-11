@@ -6,7 +6,7 @@ from decimal import Decimal
 
 
 class Product(Base):
-    __tablename__ = "product"
+    __tablename__ = "products"
 
     product_id: Mapped[int] = mapped_column(primary_key=True)
     code: Mapped[str | None] = mapped_column(String(50))

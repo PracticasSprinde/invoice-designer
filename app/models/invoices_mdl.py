@@ -51,7 +51,7 @@ class InvoiceLine(Base):
 
     line_id: Mapped[int] = mapped_column(primary_key=True)
     invoice_id: Mapped[int] = mapped_column(ForeignKey("invoices.invoice_id"))
-    product_id: Mapped[int | None] = mapped_column(ForeignKey("product.product_id", ondelete="SET NULL"))
+    product_id: Mapped[int | None] = mapped_column(ForeignKey("products.product_id", ondelete="SET NULL"))
 
     # Copia de los datos del producto al crear la factura
     description: Mapped[str] = mapped_column(String(250))
