@@ -6,7 +6,7 @@ from typing import Any  # Cualquier tipo
 # Modelo de la plantilla que envia el usuario
 class TemplateCreate(BaseModel):
     name: str = Field(min_length=1, max_length=100)
-    layout: dict[str, Any] = {}  # Opcional
+    layout: dict[str, Any] = Field(default_factory=dict)  # Opcional
     issuer_id: int
 
 
