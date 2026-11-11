@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, AliasPath
 from decimal import Decimal
 from datetime import date
 from typing import Any
@@ -25,6 +25,7 @@ class InvoiceLine(InvoiceLineCreate):
 # Modelo con los datos necesarios para crear una factura
 class InvoiceCreate(BaseModel):
     number: str = Field(min_length=1, max_length=30)
+    title: str | None = Field(default=None, max_length=150)
     issue_date: date = Field(default_factory=date.today)  ##Fecha de hoy
     client_id: int
     issuer_id: int
@@ -37,6 +38,7 @@ class InvoiceCreate(BaseModel):
 # Modelo de factura con su identificador y los importes calculados
 class Invoice(InvoiceCreate):
     invoice_id: int
+    client_name: str = Field(validation_alias=AliasPath("client", "name"))
     subtotal: Decimal
     discount_amount: Decimal
     taxable_base: Decimal
@@ -45,6 +47,7 @@ class Invoice(InvoiceCreate):
     base_breakdown: dict[str, str]
     tax_breakdown: dict[str, str]
     lines: list[InvoiceLine] = Field(min_length=1)  # Mínimo una línea
+
     model_config = ConfigDict(from_attributes=True)
 
 
