@@ -1,6 +1,10 @@
 from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
+from datetime import date
+
+# from app.services.pdf_generator import generate_invoice_pdf
 from app.core.database import get_db
 from app.schemas.invoices_sch import Invoice as InvoiceSchema,InvoiceLine,InvoiceCreate,InvoiceTotals
 from app.repositories import invoices_repo as invoices_repo
@@ -206,3 +210,58 @@ def delete_invoice(invoice_id: int, db: Session = Depends(get_db)):
             status_code=404,
             detail=f"Deletion failed: invoice with ID {invoice_id} not found",
         )
+
+
+# Obtener el siguiente número de factura
+@router.get("/next-number/{user_id}")
+def get_next_invoice_number(
+    user_id: int,
+    issue_date: date,
+    db: Session = Depends(get_db)
+):
+    return {
+        "number": invoices_repo.generate_invoice_number(
+            user_id,
+            issue_date,
+            db
+        )
+    }
+
+
+# # Descargar una factura en PDF
+# @router.get("/{invoice_id}/pdf")
+# def download_invoice_pdf(
+#     invoice_id: int,
+#     db: Session = Depends(get_db)
+# ):
+
+#     # Buscar la factura
+#     invoice = invoices_repo.get_invoice(invoice_id, db)
+
+#     # Comprobar si existe
+#     if not invoice:
+#         raise HTTPException(
+#             status_code=404,
+#             detail="Factura no encontrada."
+#         )
+
+#     # Generar el PDF
+#     try:
+#         pdf_buffer = generate_invoice_pdf(invoice)
+
+#     except ValueError as error:
+#         raise HTTPException(
+#             status_code=400,
+#             detail=str(error)
+#         )
+
+#     # Devolver el archivo PDF
+#     return StreamingResponse(
+#         pdf_buffer,
+#         media_type="application/pdf",
+#         headers={
+#             "Content-Disposition": (
+#                 f'attachment; filename="factura_{invoice.number}.pdf"'
+#             )
+#         }
+#     )
