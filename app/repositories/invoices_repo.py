@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
+from datetime import date
+
 from app.models.invoices_mdl import InvoiceLine, Invoice
 from app.models.products_mdl import Product
 from app.schemas.invoices_sch import InvoiceCreate
@@ -22,8 +24,22 @@ def totals_for_db(lines, global_discount_percent) -> dict:
 # Añadir factura en la base de datos
 def create_invoice(data: InvoiceCreate, db: Session) -> Invoice:
 
+    # Obtener los datos de la factura
+    invoice_data = data.model_dump(exclude={"lines"})
+
+    # Generar automáticamente el número de factura
+    invoice_data["number"] = generate_invoice_number(
+        data.issuer_id,
+        data.issue_date,
+        db
+    )
+
+    # Comprobar que el número no esté duplicado
+    if invoice_number_exists(data.issuer_id, invoice_data["number"], db):
+        raise ValueError("Ya existe una factura con ese número")
+
     # Crear factura
-    invoice = Invoice(**data.model_dump(exclude={"lines"}))
+    invoice = Invoice(**invoice_data)
 
     # Preparar las líneas de la factura
     prepared_lines = []
@@ -72,6 +88,7 @@ def create_invoice(data: InvoiceCreate, db: Session) -> Invoice:
     return invoice
 
 
+
 # Retorna todas las facturas
 def list_invoices(db: Session) -> list[Invoice]:
     return list(db.scalars(select(Invoice)).all())
@@ -90,8 +107,17 @@ def update_invoice(invoice_id: int, data: InvoiceCreate, db: Session) -> Invoice
     if invoice is None:
         return None
 
+     # Comprobar que el nuevo número no esté duplicado
+    if invoice_number_exists(
+        invoice.user_id,
+        data.number,
+        db,
+        invoice.invoice_id
+    ):
+        raise ValueError("Ya existe una factura con ese número")
+
     # Actualiza datos
-    for field, value in data.model_dump(exclude={"lines", "user_id"}).items():
+    for field, value in data.model_dump(exclude={"lines", "issuer_id"}).items():
         setattr(invoice, field, value)
 
     # Eliminar las líneas anteriores
@@ -151,3 +177,46 @@ def delete_invoice(invoice_id: int, db: Session) -> bool:
     db.delete(invoice)
     db.commit()
     return True
+
+# Generar el siguiente número de factura
+def generate_invoice_number(user_id: int, issue_date: date, db: Session) -> str:
+
+    year = issue_date.year
+    prefix = f"{year}-"
+
+    last_invoice = db.scalars(
+        select(Invoice)
+        .where(
+            Invoice.user_id == user_id,
+            Invoice.number.like(f"{prefix}%"),
+        )
+        .order_by(Invoice.number.desc())
+    ).first()
+
+    if last_invoice is None:
+        next_number = 1
+    else:
+        last_number = int(last_invoice.number.split("-")[1])
+        next_number = last_number + 1
+
+    return f"{year}-{next_number:03d}"
+
+
+# Comprobar si el número de factura ya existe
+def invoice_number_exists(
+    user_id: int,
+    number: str,
+    db: Session,
+    invoice_id: int | None = None
+) -> bool:
+
+    query = select(Invoice).where(
+        Invoice.user_id == user_id,
+        Invoice.number == number
+    )
+
+    if invoice_id is not None:
+        query = query.where(Invoice.invoice_id != invoice_id)
+
+    return db.scalars(query).first() is not None
+
