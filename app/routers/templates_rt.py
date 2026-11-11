@@ -99,13 +99,13 @@ def create_template(data: TemplateCreate, db: Session = Depends(get_db)):
 
 # Obtener todas las plantillas del emisor
 @router.get("/", response_model=list[TemplateSchema], summary="Get list of templates")
-def list_clients(user_id: int = Query(...), db: Session = Depends(get_db)):
-    return templates_repo.list_templates(user_id, db)
+def list_clients(issuer_id: int = Query(...), db: Session = Depends(get_db)):
+    return templates_repo.list_templates(issuer_id, db)
 
 # Obtener plantilla por ID
 @router.get("/{templet_id}", response_model=TemplateSchema, summary="Get a template by ID")
-def get_template(template_id:int, user_id: int = Query(...), db: Session = Depends(get_db)):
-    template = templates_repo.get_template(template_id, user_id, db)
+def get_template(template_id:int, issuer_id: int = Query(...), db: Session = Depends(get_db)):
+    template = templates_repo.get_template(template_id, issuer_id, db)
     
     if template is None:
         raise HTTPException(
@@ -117,8 +117,8 @@ def get_template(template_id:int, user_id: int = Query(...), db: Session = Depen
 
 # Modificar plantilla
 @router.put("/{template_id}", response_model=TemplateSchema, summary="Update an existing template")
-def update_template(template_id: int,data: TemplateCreate, user_id: int = Query(...), db: Session = Depends(get_db)):
-    template = templates_repo.update_template(template_id, user_id, data, db)
+def update_template(template_id: int,data: TemplateCreate, issuer_id: int = Query(...), db: Session = Depends(get_db)):
+    template = templates_repo.update_template(template_id, issuer_id, data, db)
     
     if template is None:
         raise HTTPException(
@@ -130,8 +130,8 @@ def update_template(template_id: int,data: TemplateCreate, user_id: int = Query(
 
 # Eliminar plantilla
 @router.delete("/{template_id}", summary="Delete a template", status_code=status.HTTP_204_NO_CONTENT)
-def delete_template(template_id: int, user_id: int = Query(...), db: Session = Depends(get_db)):
-    template = templates_repo.delete_template(template_id,user_id, db)
+def delete_template(template_id: int, issuer_id: int = Query(...), db: Session = Depends(get_db)):
+    template = templates_repo.delete_template(template_id,issuer_id, db)
     
     if not template:
         raise HTTPException(
