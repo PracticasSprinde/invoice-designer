@@ -28,6 +28,8 @@ class Invoice(Base):
     issuer_id: Mapped[int] = mapped_column(ForeignKey("issuers.issuer_id"))
     template_id: Mapped[int | None] = mapped_column(ForeignKey("templates.template_id"))
 
+    template_layout: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+
     subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     discount_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     taxable_base: Mapped[Decimal] = mapped_column(Numeric(12, 2))
