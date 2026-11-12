@@ -30,6 +30,7 @@ class InvoiceCreate(BaseModel):
     client_id: int
     issuer_id: int
     template_id: int | None = None
+    template_layout: dict | None = None
     global_discount_percent: Decimal = Field(default=Decimal("0"), ge=0, le=100)
     notes: str | None = None
     lines: list[InvoiceLineCreate] = Field(min_length=1)  # Mínimo una línea
