@@ -4,6 +4,7 @@ from sqlalchemy import select
 from datetime import date
 
 from app.models.invoices_mdl import InvoiceLine, Invoice
+from app.models.templates_mdl import Template
 from app.models.products_mdl import Product
 from app.schemas.invoices_sch import InvoiceCreate
 from app.services.calculations import calculate_invoice_totals, calculate_line
@@ -37,6 +38,13 @@ def create_invoice(data: InvoiceCreate, db: Session) -> Invoice:
     # Comprobar que el número no esté duplicado
     if invoice_number_exists(data.issuer_id, invoice_data["number"], db):
         raise ValueError("Ya existe una factura con ese número")
+
+    # Obtener la plantilla seleccionada
+    template = db.get(Template, data.template_id)
+
+    # Guardar una copia del diseño de la plantilla
+    if template is not None:
+        invoice_data["template_layout"] = template.layout
 
     # Crear factura
     invoice = Invoice(**invoice_data)
