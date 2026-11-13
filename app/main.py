@@ -5,9 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# Permite que el front y el back se comuniquen
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["___"],
+    allow_origins=["http://127.0.0.1:5500"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
