@@ -1,15 +1,31 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from app.routers import clients_rt, invoices_rt, templates_rt, issuer_rt, products_rt
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# Registrar las rutas de clientes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["___"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Registrar las rutas de API en memoria
 app.include_router(clients_rt.router_memory)
 app.include_router(issuer_rt.router_memory)
 app.include_router(products_rt.router_memory)
 app.include_router(templates_rt.router_memory)
 app.include_router(invoices_rt.router_memory)
+
+
+# Registrar las rutas de PostgreSQL
+app.include_router(clients_rt.router)
+app.include_router(issuer_rt.router)
+app.include_router(products_rt.router)
+app.include_router(templates_rt.router)
+app.include_router(invoices_rt.router)
 
 
 class Main(BaseModel):
