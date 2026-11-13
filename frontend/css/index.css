@@ -1,0 +1,16 @@
+/* Configuracion del index*/
+*{
+    box-sizing: border-box;
+}
+
+/* Configuracion del body*/
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*configuracion de app*/
+.app {
+    display: flex; /*coloca los hijos uno al alado del otro*/
+    min-height: 100vh; /*alto completo de ventana del navegador*/
+}
