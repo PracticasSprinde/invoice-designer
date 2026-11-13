@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diseñador de facturas" />
+    <meta name="keywords" content="invoice,designer" />
+    <!-- Esta linea es un comentario -->
+    <title>InvoiceDesigner</title>
+
+    <!-- Rutas a los estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body> 
+    <!-- Div(contenedor principal) - app(identificacion para css .app) -->
+    <div class="app">
+
+        <!-- contenido secundario - sidebar(identificacion para css .sidebar) -->
+        <aside class="sidebar">
+
+            <h1>InvoiceDesigner</h1>
+ 
+            <!-- enlaces a distintas paginas -->
+            <nav>
+                <!-- data-view(que vista mostrar) -->
+                <a href="#" data-view="invoices">Facturas</a>
+            </nav>
+
+        </aside>
+
+        <!-- contenido secundario - content(identificacion para css .content) -->
+        <main class="content">
+
+            <header>
+                <h2 id="view-title">Facturas</h2>
+            </header>
+
+            <!-- seccion de contenido -->
+            <section id="view">
+                <p>Aquí irá el contenido</p>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
