@@ -1,0 +1,69 @@
+/*Sidebar*/
+.sidebar {
+    width: 250px; /*ancho*/
+    min-height: 100vh; /*100% altura navegador*/
+    padding: 20px; /*espacio interior cuatro lados*/
+    display: flex; /*activa Flexbox, organiza elementos*/
+    flex-direction: column; /*elementos en columna*/
+    background-color: var(--color-sidebar);
+    color: var(--color-text);
+}
+
+
+/*color degradado*/
+/* background: linear-gradient(
+        to bottom,
+        var(--color-primary),
+        var(--color-card)
+    ); */
+
+
+/*sidebar enlaces*/
+.sidebar nav {
+    display: flex; /*organiza elementos*/
+    flex-direction: column; /*elementos en columna*/
+    flex: 1; /*ocupa espacio vertical*/
+}
+
+/*titulo sidebar*/
+.sidebar h1 {
+    font-size: 27px;
+    margin-bottom: 30px; /*margen inferior*/
+    color: var(--color-text);
+}
+
+/*enlaces superiores de navegacion*/
+.sidebar nav .menu-top {
+    display: flex; /*organiza elementos*/
+    flex-direction: column; /*elementos en columna*/
+    gap: 10px; /*espacio entre elementos*/
+}
+
+/*enlaces de navegacion dentro de <a>*/
+.sidebar nav a { 
+    text-decoration: none; /*elimina subrayado*/
+    padding: 8px; /*espacio interior*/
+    border-radius: 6px; /*redondea esquinas del elemento*/
+    color: var(--color-text);
+}
+
+/*estilo al pasar el raton encima*/
+.sidebar nav a:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/*linea de separacion*/
+.sidebar nav hr {
+    width: 100%; /*ancho*/
+    margin: auto 0 15px 0; /*margenes, solo el inferior tiene 15px*/
+    border: 0; /*elimina el borde predeterminado*/
+    flex: 0 0 auto; /*ni crece ni reduce*/
+    border-top: 1px solid var(--color-border);
+}
+
+/*enlaces inferiores de navegacion*/
+.sidebar nav .menu-bottom {
+    display: flex; /*organiza elementos*/
+    flex-direction: column; /*elementos en columna*/
+    gap: 10px; /*espacio entre elementos*/
+}
