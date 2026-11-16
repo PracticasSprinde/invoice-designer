@@ -5,8 +5,8 @@ from app.models.issuer_mdl import Issuer
 from app.schemas.issuer_sch import IssuerCreate
 
 
-# Añadir usuario en la base de datos
-def create_user(data: IssuerCreate, db: Session) -> Issuer:
+# Añadir emisor en la base de datos
+def create_issuer(data: IssuerCreate, db: Session) -> Issuer:
     # Crear usuario
     issuer = Issuer(**data.model_dump())
 
@@ -16,19 +16,19 @@ def create_user(data: IssuerCreate, db: Session) -> Issuer:
     return issuer
 
 
-# Retorna todos los usuarios
+# Retorna todos los emisores
 def list_users(db: Session) -> list[Issuer]:
     return list(db.scalars(select(Issuer)).all())
 
 
-# Retorna usuario por ID
-def get_user(issuer_id: int, db: Session) -> Issuer | None:
+# Retorna emisor por ID
+def get_issuer(issuer_id: int, db: Session) -> Issuer | None:
     return db.get(Issuer, issuer_id)
 
 
-# Modificar usuario
-def update_user(issuer_id: int, data: IssuerCreate, db: Session) -> Issuer | None:
-    issuer = get_user(issuer_id, db)
+# Modificar emisor
+def update_issuer(issuer_id: int, data: IssuerCreate, db: Session) -> Issuer | None:
+    issuer = get_issuer(issuer_id, db)
     
     if issuer is None:
         return None
@@ -42,9 +42,9 @@ def update_user(issuer_id: int, data: IssuerCreate, db: Session) -> Issuer | Non
     return issuer
 
 
-# Eliminar usuario de la base de datos
-def delete_user(issuer_id: int, db: Session) -> bool:
-    issuer = get_user(issuer_id, db)
+# Eliminar emisor de la base de datos
+def delete_issuer(issuer_id: int, db: Session) -> bool:
+    issuer = get_issuer(issuer_id, db)
 
     if not issuer:
         return False

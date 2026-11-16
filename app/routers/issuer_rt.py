@@ -85,19 +85,19 @@ def delete_issuer(issuer_id: int):
 # ================== CONSULTAS BASE DATOS ==================
 
 
-# Añadir usuario
+# Añadir emisor
 @router.post("/", response_model=IssuerSchema, status_code=status.HTTP_201_CREATED)
 def create_issuer(data: IssuerCreate, db: Session = Depends(get_db)):
     return issuer_repo.create_issuer(data, db)
 
 
-# Obtener todos los usuarios
+# Obtener todos los emisores
 @router.get("/", response_model=list[IssuerSchema], summary="Get list of issuer")
-def list_users(db: Session = Depends(get_db)):
+def list_issuers(db: Session = Depends(get_db)):
     return issuer_repo.list_users(db)
 
 
-# Obtener usuario por ID
+# Obtener emisor por ID
 @router.get("/{issuer_id}", response_model= IssuerSchema, summary="Get a issuer by ID")
 def get_issuer(issuer_id: int, db: Session = Depends(get_db)):
     issuer = issuer_repo.get_issuer(issuer_id, db)
@@ -111,7 +111,7 @@ def get_issuer(issuer_id: int, db: Session = Depends(get_db)):
     return issuer
 
 
-# Modificar usuario
+# Modificar emisor
 @router.put("/{issuer_id}", response_model= IssuerSchema, summary="Update an existing issuer")
 def update_issuer(issuer_id: int, data: IssuerCreate, db: Session = Depends(get_db)):
     issuer = issuer_repo.update_issuer(issuer_id, data, db)
