@@ -10,10 +10,24 @@
     <title>InvoiceDesigner</title>
 
     <!-- Rutas a los estilos -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/views/invoices.css">
+    <link rel="stylesheet" href="css/views/clients.css">
+    <link rel="stylesheet" href="css/views/products.css">
+    <link rel="stylesheet" href="css/views/templates.css">
+    <link rel="stylesheet" href="css/views/editor.css">
+    <link rel="stylesheet" href="css/views/issuer.css">
+    <link rel="stylesheet" href="css/views/settings.css">
+
+    <!-- biblioteca para iconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+
 </head>
 
-<body> 
+<body>
     <!-- Div(contenedor principal) - app(identificacion para css .app) -->
     <div class="app">
 
@@ -21,11 +35,46 @@
         <aside class="sidebar">
 
             <h1>InvoiceDesigner</h1>
- 
+
             <!-- enlaces a distintas paginas -->
             <nav>
-                <!-- data-view(que vista mostrar) -->
-                <a href="#" data-view="invoices">Facturas</a>
+                <!-- enlaces superior del sidebar -->
+                <div class="menu-top">
+                    <!-- data-view(que vista mostrar) -->
+                    <a href="#" data-view="invoices">
+                        <i class="bi bi-receipt"></i>
+                        Facturas
+                    </a>
+                    <a href="#" data-view="clients">
+                        <i class="bi bi-people"></i>
+                        Clientes
+                    </a>
+                    <a href="#" data-view="products">
+                        <i class="bi bi-box-seam"></i>
+                        Productos
+                    </a>
+                    <a href="#" data-view="templates">
+                        <i class="bi bi-files"></i>
+                        Plantillas
+                    </a>
+                    <a href="#" data-view="editor">
+                        <i class="bi bi-pencil-square"></i>
+                        Editor
+                    </a>
+                </div>
+
+                <hr>
+                <!-- enlaces inferior del sidebar -->
+                <div class="menu-bottom">
+                    <a href="#" data-view="issuer">
+                        <i class="bi bi-person-vcard"></i>
+                        Mis datos fiscales
+                    </a>
+                    <a href="#" data-view="settings">
+                        <i class="bi bi-gear"></i>
+                        Configuración
+                    </a>
+                </div>
             </nav>
 
         </aside>
@@ -45,7 +94,8 @@
         </main>
     </div>
 
-    <script src="app.js"></script>
+    <script src="js/api.js"></script> <!-- llamadas a API -->
+    <script src="js/menu.js"></script> <!-- menu de la app -->
 </body>
 
 </html>
