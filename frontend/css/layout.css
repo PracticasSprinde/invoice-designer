@@ -1,0 +1,32 @@
+/*contenido principal*/
+.content {
+    flex: 1; /*ocupa espacio horizontal*/
+    padding: 30px; /*espacio interior cuatro lados*/
+    display: flex; /*organizar elementos*/
+    flex-direction: column; /*en columna*/
+    border-radius: 16px; 
+    margin: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+    background-color: var(--color-card);
+    
+}
+
+/*cabecera del contenido principal*/
+.content header {
+    margin-bottom: 15px; /*espacio debajo*/
+}
+
+/*estilo al titulo h2*/
+.content header h2 {
+    padding: 10px; /*espacio alrededor del título*/
+    margin: 0; 
+    font-size: 24px;
+    background-color: transparent;
+}
+
+/*seccion del contenido*/
+.content section {
+    padding: 20px; /*espacio alrededor*/
+    min-width: 0; /*se reduce al espacio disponible*/
+    flex: 1;
+}

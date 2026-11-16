@@ -1,24 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 /* Colores generales de la aplicación */
-:root { /*elemento raíz*/
-    --color-primary: #E9E9E9; /*color principal*/
-    --color-primary-hover: #E9E9E9; /*pasamos el ratón por encima*/
+:root {
 
-    --color-background: #FEFEFE; /*fondo generico*/
-    --color-sidebar: #F2F2F2; /*menu lateral*/
-    --color-card: #FEFEFE; /*tarjetas*/
+    /* Fondo general */
+    --color-primary: #D6D6D6;
 
-    --color-text: #0E1116; /*texto*/
-    --color-text-muted: #777777; /*texto secundario*/
+    /* Hover */
+    --color-primary-hover: #C5C5C5;
 
-    --color-border: #BDBBBD; /*bordes tarjetas*/
+    /* Fondo de la aplicación */
+    --color-background: #D6D6D6;
+    /* Contenido principal */
+    --color-card: #FFFFFF;
+
+    /* Títulos y texto */
+    --color-titles: #EBEBEB;
+    --color-text: #0E1116;
+    --color-text-muted: #777777;
+
+    /* Color borde */
+    --color-border: #BDBBBD;
+
+    /* Colores del degradado */
+    --color-gradient-start: #91A9CE;
+    --color-gradient-end: #C5D4EA;
 
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+
 /* Configuracion del index*/
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -30,7 +43,10 @@ body {
 
 /*configuracion de app*/
 .app {
-    display: flex; /*coloca los hijos uno al alado del otro*/
-    min-height: 100vh; /*alto completo de ventana del navegador*/
+    display: flex;/*coloca los hijos uno al alado del otro*/
+    min-height: 100vh;/*alto completo de ventana del navegador*/
+    background: linear-gradient(to bottom, /* Color degradado*/
+            var(--color-gradient-start),
+            var(--color-gradient-end)
+    );
 }
-

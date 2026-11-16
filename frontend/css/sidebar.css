@@ -5,18 +5,9 @@
     padding: 20px; /*espacio interior cuatro lados*/
     display: flex; /*activa Flexbox, organiza elementos*/
     flex-direction: column; /*elementos en columna*/
-    background-color: var(--color-sidebar);
+    background-color: transparent;
     color: var(--color-text);
 }
-
-
-/*color degradado*/
-/* background: linear-gradient(
-        to bottom,
-        var(--color-primary),
-        var(--color-card)
-    ); */
-
 
 /*sidebar enlaces*/
 .sidebar nav {
@@ -27,7 +18,7 @@
 
 /*titulo sidebar*/
 .sidebar h1 {
-    font-size: 27px;
+    font-size: 20px;
     margin-bottom: 30px; /*margen inferior*/
     color: var(--color-text);
 }
