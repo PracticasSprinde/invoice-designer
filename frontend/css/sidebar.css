@@ -36,6 +36,17 @@
     padding: 8px; /*espacio interior*/
     border-radius: 6px; /*redondea esquinas del elemento*/
     color: var(--color-text);
+
+    display: flex; /*icono a la do de texto*/
+    align-items: center; /*posiciona iconos*/
+    gap: 10px;
+    transition: background-color 0.2s ease; /*cambio de color mas suave*/
+}
+
+/* estilo del enlace activo */
+.sidebar nav a.active {
+    background-color: var(--color-primary-hover);
+    font-weight: 600;
 }
 
 /*estilo al pasar el raton encima*/
