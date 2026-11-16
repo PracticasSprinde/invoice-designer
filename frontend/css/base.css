@@ -10,7 +10,8 @@ body {
 }
 
 /*configuracion de app*/
-.app {
+.base {
     display: flex; /*coloca los hijos uno al alado del otro*/
     min-height: 100vh; /*alto completo de ventana del navegador*/
 }
+
