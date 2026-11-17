@@ -3,6 +3,11 @@ async function loadView(name) {
   const response = await fetch(`views/${name}.html`); //Solicita archivo HTML
   const html = await response.text();
   document.getElementById("view").innerHTML = html; // Busca elemento HTML con etiqueta "view"
+
+  // Inicializar la vista de clientes
+if (name === "clients") {
+    initClients();
+}
 }
 
 // Detecta los clicks del menú
