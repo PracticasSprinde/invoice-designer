@@ -8,8 +8,7 @@
     --color-background: #EAECEF;     
     --color-card: #FFFFFF;           
     
-    /* Títulos y texto */
-    --color-titles: #0F172A;         
+    /* Títulos y texto */        
     --color-text: #334155;           
     --color-text-muted: #64748B;     
     
@@ -26,8 +25,8 @@
     --color-btn-text: #FFFFFF;
 
     /* Botones tabla */
-    --color-bnt-edit-hover: #7C9CEB;
-    --color-bnt-delete-hover: #D47E7E;  
+    --color-btn-edit-hover: #7C9CEB;
+    --color-btn-delete-hover: #D47E7E;  
 
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
