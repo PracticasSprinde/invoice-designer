@@ -3,27 +3,31 @@
 /* Colores generales de la aplicación */
 :root {
     /* Fondo general y barra lateral un poco más definidos */
-    --color-primary: #EAECEF;        /* Subido ligeramente de tono para ganar contraste */
-    --color-primary-hover: #D8DCE3;  /* Hover más marcado para el menú */
+    --color-primary: #EAECEF;        
+    --color-primary-hover: #CBD5E1; 
     --color-background: #EAECEF;     
-    --color-card: #FFFFFF;           /* La tarjeta blanca resalta mucho más ahora */
+    --color-card: #FFFFFF;           
     
     /* Títulos y texto */
-    --color-titles: #0F172A;         /* Título nítido y potente */
+    --color-titles: #0F172A;         
     --color-text: #334155;           
     --color-text-muted: #64748B;     
     
-    /* Bordes más visibles para separar mejor los elementos */
+    /* Bordes */
     --color-border: #CBD5E1;         
     
-    /* Cabecera adaptada al nuevo tono */
+    /* Cabecera */
     --color-gradient-start: #FFFFFF; 
     --color-gradient-end: #E2E8F0;
     
-    /* Botón principal en Gris Antracita Oscuro */
+    /* Botónes */
     --color-btn: #1E293B;            
     --color-btn-hover: #475569;      
-    --color-btn-text: #FFFFFF;       
+    --color-btn-text: #FFFFFF;
+
+    /* Botones tabla */
+    --color-bnt-edit-hover: #7C9CEB;
+    --color-bnt-delete-hover: #D47E7E;  
 
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -43,8 +47,5 @@ body {
 .app {
     display: flex;/*coloca los hijos uno al alado del otro*/
     min-height: 100vh;/*alto completo de ventana del navegador*/
-    background: linear-gradient(to bottom, /* Color degradado*/
-            var(--color-gradient-start),
-            var(--color-gradient-end)
-    );
+    background: var(--color-gradient-end);
 }

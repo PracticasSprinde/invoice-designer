@@ -1,7 +1,8 @@
 /*contenido principal*/
 .content {
     flex: 1; /*ocupa espacio horizontal*/
-    padding: 30px; /*espacio interior cuatro lados*/
+    min-width: 0; /*reduce el contenido*/
+    padding: 20px; /*espacio interior cuatro lados*/
     display: flex; /*organizar elementos*/
     flex-direction: column; /*en columna*/
     border-radius: 16px; 
