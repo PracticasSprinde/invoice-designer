@@ -1,6 +1,6 @@
 /*Sidebar*/
 .sidebar {
-    width: 250px; /*ancho*/
+    width: 230px; /*ancho*/
     min-height: 100vh; /*100% altura navegador*/
     padding: 20px; /*espacio interior cuatro lados*/
     display: flex; /*activa Flexbox, organiza elementos*/
@@ -16,11 +16,9 @@
     flex: 1; /*ocupa espacio vertical*/
 }
 
-/*titulo sidebar*/
-.sidebar h1 {
-    font-size: 20px;
+/*logo sidebar*/
+.sidebar img {
     margin-bottom: 30px; /*margen inferior*/
-    color: var(--color-text);
 }
 
 /*enlaces superiores de navegacion*/
@@ -60,7 +58,7 @@
     margin: auto 0 15px 0; /*margenes, solo el inferior tiene 15px*/
     border: 0; /*elimina el borde predeterminado*/
     flex: 0 0 auto; /*ni crece ni reduce*/
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-text);
 }
 
 /*enlaces inferiores de navegacion*/
