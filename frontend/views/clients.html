@@ -1,3 +1,153 @@
 <div class="view-clients">
-    <p>Aquí irá la lista de clientes</p>
+
+    <!-- Titulo y botón -->
+    <div class="clients-header">
+        <h1>Clientes</h1>
+
+        <button type="button" class="new-client" title="Añadir un cliente">
+            <i class="bi bi-person-plus"></i>
+            Añadir cliente
+        </button>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-clients">
+        <div class="form-header">
+            <h2>Nuevo cliente</h2>
+            <button type="button">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+        </div>
+
+        <!-- campos del formulario -->
+        <div class="form-body">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Apellido</label>
+                <input type="text" id="last-name">
+            </div>
+            <div class="form-group">
+                <label for="enterprise">Empresa</label>
+                <input type="text" id="enterprise">
+            </div>
+            <div class="form-group">
+                <label for="cif-nif">CIF/NIF</label>
+                <input type="text" id="cif-nif">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefono</label>
+                <input type="tel" id="phone">
+            </div>
+            <div class="form-group">
+                <label for="address">Direccion</label>
+                <input type="text" id="address">
+            </div>
+            <div class="form-group">
+                <label for="city">Ciudad</label>
+                <input type="text" id="city">
+            </div>
+            <div class="form-group">
+                <label for="postal-code">Cod. Postal</label>
+                <input type="text" id="postal-code">
+            </div>
+            <div class="form-group">
+                <label for="country">Pais</label>
+                <select id="country">
+                    <option value="ES">España</option>
+                    <option value="FR">Francia</option>
+                    <option value="PT">Portugal</option>
+                </select>
+            </div>
+
+        </div>
+
+        <!-- botones del formulario -->
+        <div class="form-footer">
+            <button type="button" class="btn-cancel">
+                <i class="bi bi-x-lg"></i>
+                Cancelar
+            </button>
+            <button type="button" class="btn-save">
+                <i class="bi bi-save"></i>
+                Guardar
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Tabla -->
+    <section>
+        <div class="table-container">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Empresa</th>
+                        <th>CIF/NIF</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>Ciudad</th>
+                        <th>Cod. Postal</th>
+                        <th>Pais</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ana</td>
+                        <td>García</td>
+                        <td>Vodafone</td>
+                        <td>11111111T</td>
+                        <td>ana@gmail.com</td>
+                        <td>333444555</td>
+                        <td>C/Barcelona 23</td>
+                        <td>Barcelona</td>
+                        <td>06066</td>
+                        <td>España</td>
+                        <td>
+                            <button type="button" class="btn-edit" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn-delete" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Carlos</td>
+                        <td>López</td>
+                        <td>Movistar</td>
+                        <td>22222222T</td>
+                        <td>calros@gmail.com</td>
+                        <td>222333444</td>
+                        <td>C/Pascual 56</td>
+                        <td>Valencia</td>
+                        <td>76099</td>
+                        <td>España</td>
+                        <td>
+                            <button type="button" class="btn-edit" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn-delete" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
 </div>
