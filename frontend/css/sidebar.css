@@ -34,7 +34,6 @@
     padding: 8px; /*espacio interior*/
     border-radius: 6px; /*redondea esquinas del elemento*/
     color: var(--color-text);
-
     display: flex; /*icono a la do de texto*/
     align-items: center; /*posiciona iconos*/
     gap: 10px;
@@ -50,6 +49,7 @@
 /*estilo al pasar el raton encima*/
 .sidebar nav a:hover {
     background-color: var(--color-primary-hover);
+    color: var(--color-text);
 }
 
 /*linea de separacion*/
