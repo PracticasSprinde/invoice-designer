@@ -10,78 +10,86 @@
         </button>
     </div>
 
-    <!-- Formulario -->
-    <div class="form-clients">
-        <div class="form-header">
-            <h2>Nuevo cliente</h2>
-            <button type="button">
-                <i class="bi bi-x-lg"></i>
-            </button>
+
+    <!-- modal de clientes -->
+    <div class="modal-clients">
+        <!-- Formulario -->
+        <div class="form-clients">
+            <div class="form-header">
+                <h2>Nuevo cliente</h2>
+                <button type="button" class="btn-close-modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+            </div>
+
+            <!-- campos del formulario -->
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Apellido</label>
+                    <input type="text" id="last-name">
+                </div>
+                <div class="form-group">
+                    <label for="enterprise">Empresa</label>
+                    <input type="text" id="enterprise">
+                </div>
+                <div class="form-group">
+                    <label for="cif-nif">CIF/NIF</label>
+                    <input type="text" id="cif-nif">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefono</label>
+                    <input type="tel" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="address">Direccion</label>
+                    <input type="text" id="address">
+                </div>
+                <div class="form-group">
+                    <label for="city">Ciudad</label>
+                    <input type="text" id="city">
+                </div>
+                <div class="form-group">
+                    <label for="postal-code">Cod. Postal</label>
+                    <input type="text" id="postal-code">
+                </div>
+                <div class="form-group">
+                    <label for="country">Pais</label>
+                    <select id="country">
+                        <option value="ES">España</option>
+                        <option value="FR">Francia</option>
+                        <option value="PT">Portugal</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- botones del formulario -->
+            <div class="form-footer">
+                <button type="button" class="btn-cancel">
+                    <i class="bi bi-x-lg"></i>
+                    Cancelar
+                </button>
+                <button type="button" class="btn-save">
+                    <i class="bi bi-save"></i>
+                    Guardar
+                </button>
+            </div>
+
 
         </div>
 
-        <!-- campos del formulario -->
-        <div class="form-body">
-            <div class="form-group">
-                <label for="name">Nombre</label>
-                <input type="text" id="name">
-            </div>
-            <div class="form-group">
-                <label for="last-name">Apellido</label>
-                <input type="text" id="last-name">
-            </div>
-            <div class="form-group">
-                <label for="enterprise">Empresa</label>
-                <input type="text" id="enterprise">
-            </div>
-            <div class="form-group">
-                <label for="cif-nif">CIF/NIF</label>
-                <input type="text" id="cif-nif">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email">
-            </div>
-            <div class="form-group">
-                <label for="phone">Telefono</label>
-                <input type="tel" id="phone">
-            </div>
-            <div class="form-group">
-                <label for="address">Direccion</label>
-                <input type="text" id="address">
-            </div>
-            <div class="form-group">
-                <label for="city">Ciudad</label>
-                <input type="text" id="city">
-            </div>
-            <div class="form-group">
-                <label for="postal-code">Cod. Postal</label>
-                <input type="text" id="postal-code">
-            </div>
-            <div class="form-group">
-                <label for="country">Pais</label>
-                <select id="country">
-                    <option value="ES">España</option>
-                    <option value="FR">Francia</option>
-                    <option value="PT">Portugal</option>
-                </select>
-            </div>
-
-        </div>
-
-        <!-- botones del formulario -->
-        <div class="form-footer">
-            <button type="button" class="btn-cancel">
-                <i class="bi bi-x-lg"></i>
-                Cancelar
-            </button>
-            <button type="button" class="btn-save">
-                <i class="bi bi-save"></i>
-                Guardar
-            </button>
-        </div>
 
     </div>
+
+
 
     <!-- Tabla -->
     <section>

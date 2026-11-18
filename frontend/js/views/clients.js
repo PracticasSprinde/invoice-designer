@@ -4,12 +4,24 @@ function initClients() {
     // Boton abrir el formulario
     const btnNewClient = document.querySelector(".new-client");
 
-    // Formulario de clientes
-    const formClients = document.querySelector(".form-clients");
+    // Boton para cerrar el modal de clientes
+    const btnCloseModal = document.querySelector(".btn-close-modal");
 
-    // Evento al pulsar el boton
+    // Modal de clientes
+    const modalClients = document.querySelector(".modal-clients");
+
+
+
+
+
+    // Evento, abre formulario
     btnNewClient.addEventListener("click", function () {
-        formClients.style.display = "flex";
+        modalClients.style.display = "flex";
     });
 
+    // Evento, cierra formulario
+    btnCloseModal.addEventListener("click", function(){
+        modalClients.style.display = "none";
+
+    });
 }

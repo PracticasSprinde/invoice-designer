@@ -1,7 +1,8 @@
 /*clientes*/
 .view-clients {
     display: flex;
-    flex-direction: column;/*elementos en columna*/
+    flex-direction: column;
+    /*elementos en columna*/
     gap: 20px;
 }
 
@@ -12,7 +13,8 @@
     align-items: center;
     padding: 20px;
     border-radius: 20px;
-    background: linear-gradient(to bottom, /* Color degradado*/
+    background: linear-gradient(to bottom,
+            /* Color degradado*/
             var(--color-gradient-start),
             var(--color-gradient-end));
 }
@@ -30,7 +32,7 @@
     font-size: 18px;
     border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-    background-color:var(--color-text);
+    background-color: var(--color-text);
     color: var(--color-btn-text);
     cursor: pointer;
 }
@@ -53,11 +55,12 @@
 /*tabla*/
 .view-clients table {
     width: 100%;
-    border-collapse: collapse; /*quitar separacion columnas*/
+    border-collapse: collapse;
+    /*quitar separacion columnas*/
 }
 
 /*cabecera tabla*/
-.view-clients table th{
+.view-clients table th {
     padding: 10px;
     text-align: center;
     background: var(--color-gradient-end);
@@ -74,10 +77,10 @@
 }
 
 /*celdas tabla*/
-.view-clients table td{
+.view-clients table td {
     padding: 5px 10px;
     text-align: center;
-    background:var(--color-card);
+    background: var(--color-card);
 }
 
 /*linea de separacion*/
@@ -86,42 +89,46 @@
 }
 
 /*hover para la fila seleccionada*/
-.view-clients table tbody tr:hover td{
+.view-clients table tbody tr:hover td {
     background-color: var(--color-gradient-end);
 }
 
 /*boton editar de tabla*/
-.view-clients table tbody button.btn-edit{
+.view-clients table tbody button.btn-edit {
     padding: 6px;
     color: var(--color-text);
     background-color: var(--color-gradient-end);
 }
 
 /*hover boton editar*/
-.view-clients table tbody button.btn-edit:hover{
+.view-clients table tbody button.btn-edit:hover {
     padding: 6px;
     background-color: var(--color-bnt-edit-hover);
 }
 
 /*boton eliminar de tabla*/
-.view-clients table tbody button.btn-delete{
+.view-clients table tbody button.btn-delete {
     padding: 6px;
     color: var(--color-text);
     background-color: var(--color-gradient-end);
 }
 
 /*hover boton eliminar*/
-.view-clients table tbody button.btn-delete:hover{
+.view-clients table tbody button.btn-delete:hover {
     padding: 6px;
     background-color: var(--color-bnt-delete-hover);
 }
 
 /*fomulario*/
 .form-clients {
-    display: none;
+    display: flex;
     flex-direction: column;
     border-radius: 20px;
     padding: 10px;
+    width: 80%;
+max-width: 900px;
+max-height: 90%;
+overflow-y: auto;
     background-color: var(--color-gradient-end);
 }
 
@@ -141,7 +148,7 @@
 }
 
 /*boton cabecera formulario*/
-.form-header button{
+.form-header button {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -153,7 +160,8 @@
 /*labels e inputs del formulario*/
 .form-body {
     display: grid;
-    grid-template-columns: 1fr 1fr; /*de arriba a abajo*/
+    grid-template-columns: 1fr 1fr;
+    /*de arriba a abajo*/
     padding: 10px;
     gap: 15px;
 }
@@ -180,7 +188,7 @@
 }
 
 /*linea de separacion entre campos y botones*/
-.form-footer{
+.form-footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
@@ -189,12 +197,12 @@
 }
 
 /*botones del formulario*/
-.form-footer button{
+.form-footer button {
     padding: 10px;
     font-size: 16px;
     border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-    background-color:var(--color-text);
+    background-color: var(--color-text);
     color: var(--color-btn-text);
 }
 
@@ -212,4 +220,17 @@
 /*hover boton save del formulario*/
 .form-footer button.btn-save:hover {
     background-color: var(--color-btn-edit-hover);
+}
+
+/*fondo para el modal*/
+.modal-clients {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
