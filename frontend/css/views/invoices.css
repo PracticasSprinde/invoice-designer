@@ -1,0 +1,219 @@
+/*facturas*/
+.view-invoices {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*cabecera clients*/
+.invoices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(to bottom,
+            /* Color degradado*/
+            var(--color-gradient-start),
+            var(--color-primary-hover));
+}
+
+/*titulo clientes*/
+.view-invoices h1 {
+    font-size: 30px;
+    color: var(--color-text);
+}
+
+/*boton*/
+.view-invoices button {
+    border: none;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-text);
+    color: var(--color-btn-text);
+    cursor: pointer;
+}
+
+/*Hover del boton añadir cliente*/
+.view-invoices button:hover {
+    background-color: var(--color-btn-hover);
+}
+
+/*contenedor de la tabla*/
+.view-invoices .table-invoices {
+    border-radius: 15px;
+    overflow: auto;
+    margin-left: -15px;
+    margin-right: -15px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-card);
+}
+
+/*tabla*/
+.view-invoices table {
+    width: 100%;
+    border-collapse: collapse;/*quitar separacion columnas*/
+}
+
+/*cabecera tabla*/
+.view-invoices table th {
+    padding: 20px;
+    text-align: center;
+    background: var(--color-primary-hover);
+}
+
+/*celdas tabla*/
+.view-invoices table td {
+    padding: 5px 10px;
+    text-align: center;
+    background: var(--color-card);
+}
+
+/*linea de separacion*/
+.view-invoices table tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--color-primary-hover);
+}
+
+/*hover para la fila seleccionada*/
+.view-invoices table tbody tr:hover td {
+    background-color: var(--color-gradient-end);
+}
+
+/*boton editar de tabla*/
+.view-invoices table tbody button.btn-edit {
+    padding: 6px;
+    color: var(--color-text);
+    background-color: var(--color-primary-hover);
+}
+
+/*hover boton editar*/
+.view-invoices table tbody button.btn-edit:hover {
+    padding: 6px;
+    background-color: var(--color-btn-edit-hover);
+}
+
+/*boton eliminar de tabla*/
+.view-invoices table tbody button.btn-delete {
+    padding: 6px;
+    color: var(--color-text);
+    background-color: var(--color-primary-hover);
+}
+
+/*hover boton eliminar*/
+.view-invoices table tbody button.btn-delete:hover {
+    padding: 6px;
+    background-color: var(--color-btn-delete-hover);
+}
+
+/*fomulario*/
+.view-invoices .form-invoices {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 10px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90%;
+    overflow-y: auto;
+    background-color: var(--color-gradient-end);
+}
+
+/*cabecera formulario*/
+.view-invoices .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 20px;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-text);
+}
+
+/*boton cabecera formulario*/
+.view-invoices .form-header button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: var(--color-text);
+}
+
+/*labels e inputs del formulario*/
+.view-invoices .form-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    gap: 15px;
+}
+
+/*labels e inputs del formulario*/
+.view-invoices .form-group {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*estilos de los input*/
+.view-invoices .form-group input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+/*estilo del select de pais*/
+.view-invoices .form-group select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+/*linea de separacion entre campos y botones*/
+.view-invoices .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 10px;
+    border-top: 1px solid var(--color-text);
+}
+
+/*botones del formulario*/
+.view-invoices .form-footer button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-text);
+    color: var(--color-btn-text);
+}
+
+/*hover boton cancel del formulario*/
+.view-invoices .form-footer button.btn-cancel {
+    color: var(--color-text);
+    background-color: var(--color-primary-hover);
+}
+
+/*hover boton cancel del formulario*/
+.view-invoices .form-footer button.btn-cancel:hover {
+    background-color: var(--color-btn-delete-hover);
+}
+
+/*hover boton save del formulario*/
+.view-invoices .form-footer button.btn-save:hover {
+    background-color: var(--color-btn-edit-hover);
+}
+
+/*fondo para el modal*/
+.view-invoices .modal-invoices {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
