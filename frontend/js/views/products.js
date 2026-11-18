@@ -2,7 +2,7 @@
 function initProducts() {
 
     // Boton abrir el formulario
-    const btnNewProduct = document.querySelector(".new product");
+    const btnNewProduct = document.querySelector(".new-product");
 
     // Boton para cerrar el modal de productos
     const btnCloseModal = document.querySelector(".btn-close-modal");
