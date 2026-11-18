@@ -13,6 +13,26 @@ async function loadView(name) {
   if (name === "products") {
     initProducts();
   }
+
+  // Inicializar la vista de facturas
+  if (name === "invoices") {
+    initInvoices();
+  }
+
+  // Inicializar la vista de emisor
+  if (name === "issuer") {
+    initIssuer();
+  }
+
+  // Inicializar la vista de plantillas
+  if (name === "templates") {
+    initTemplates();
+  }
+
+  // Inicializar la vista de editro
+  if (name === "editor") {
+    initEditor();
+  }
 }
 
 // Detecta los clicks del menú
