@@ -1,0 +1,124 @@
+<div class="view-products">
+
+    <!-- titulo y botón -->
+    <div class="products-header">
+        <h1>Productos</h1>
+
+        <!-- boton para añadir productos -->
+        <button type="button" class="new product" title="Añadir un producto">
+            <i class="bi bi-box-seam"></i>
+            <i class="bi bi-plus"></i>
+            Añadir producto
+        </button>
+    </div>
+
+    <!-- modal de productos -->
+    <div class="modal-products"> 
+        <!-- formulario productos -->
+        <div class="form-products">
+            <div class="form-header">
+                <h2>Nuevo producto</h2>
+                <button type="button" class="btn-close-modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+            </div>
+
+            <!-- campos del formulario -->
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="code">Codigo</label>
+                    <input type="text" id="code">
+                </div>
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripcion</label>
+                    <input type="text" id="description">
+                </div>
+                <div class="form-group">
+                    <label for="category">Categoria</label>
+                    <input type="text" id="category">
+                </div>
+                <div class="form-group">
+                    <label for="price">€/Ud</label>
+                    <input type="text" id="price">
+                </div>
+                <div class="form-group">
+                    <label for="tax">IVA</label>
+                    <input type="text" id="tax">
+                </div>
+            </div>
+
+            <!-- botones del formulario -->
+            <div class="form-footer">
+                <button type="button" class="btn-cancel">
+                    <i class="bi bi-x-lg">
+                        Cancelar
+                    </i>
+                </button>
+                <button typr="button" class="btn-save">
+                    <i class="bi bi-save"></i>
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+     <!-- tabla de productos -->
+    <section>
+        <div class="table-products">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Categoria</th>
+                        <th>€/Ud.</th>
+                        <th>IVA</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <body>
+                    <tr>
+                        <td>001</td>
+                        <td>Gameboy</td>
+                        <td>Nueva</td>
+                        <td>Consolas</td>
+                        <td>199,99</td>
+                        <td>21</td>
+                        <td>
+                            <button type="button" class="btn-edit" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn-delete" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>PS5</td>
+                        <td>Nueva</td>
+                        <td>Consolas</td>
+                        <td>499,95</td>
+                        <td>21</td>
+                        <td>
+                            <button type="button" class="btn-edit" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn-delete" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                </body>
+            </table>
+        </div>
+    </section>
+</div>
