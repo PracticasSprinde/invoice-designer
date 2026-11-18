@@ -7,12 +7,11 @@ function initClients() {
     // Boton para cerrar el modal de clientes
     const btnCloseModal = document.querySelector(".btn-close-modal");
 
+    // Boton para cancelar el modal de clientes
+    const btnCancelModal = document.querySelector(".btn-cancel");
+
     // Modal de clientes
     const modalClients = document.querySelector(".modal-clients");
-
-
-
-
 
     // Evento, abre formulario
     btnNewClient.addEventListener("click", function () {
@@ -24,4 +23,9 @@ function initClients() {
         modalClients.style.display = "none";
 
     });
+
+    // Evento, cancela formulario
+    btnCancelModal.addEventListener("click", function(){
+        modalClients.style.display = "none";
+    })
 }
