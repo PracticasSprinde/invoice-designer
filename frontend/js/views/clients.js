@@ -19,13 +19,13 @@ function initClients() {
     });
 
     // Evento, cierra formulario
-    btnCloseModal.addEventListener("click", function(){
+    btnCloseModal.addEventListener("click", function() {
         modalClients.style.display = "none";
 
     });
 
     // Evento, cancela formulario
-    btnCancelModal.addEventListener("click", function(){
+    btnCancelModal.addEventListener("click", function() {
         modalClients.style.display = "none";
     })
 }
