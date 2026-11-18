@@ -29,7 +29,7 @@ async function loadView(name) {
     initTemplates();
   }
 
-  // Inicializar la vista de editro
+  // Inicializar la vista de editor
   if (name === "editor") {
     initEditor();
   }
