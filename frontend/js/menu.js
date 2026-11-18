@@ -5,9 +5,14 @@ async function loadView(name) {
   document.getElementById("view").innerHTML = html; // Busca elemento HTML con etiqueta "view"
 
   // Inicializar la vista de clientes
-if (name === "clients") {
+  if (name === "clients") {
     initClients();
-}
+  }
+
+  // Inicializar la vista de productos
+  if (name === "products") {
+    initProducts();
+  }
 }
 
 // Detecta los clicks del menú
@@ -16,7 +21,7 @@ document.querySelectorAll("nav a").forEach((link) => {
     event.preventDefault();
 
     // Quitar la clase active de todos los enlaces
-    document.querySelectorAll("nav a").forEach(function(item) {
+    document.querySelectorAll("nav a").forEach(function (item) {
       item.classList.remove("active");
     });
 
