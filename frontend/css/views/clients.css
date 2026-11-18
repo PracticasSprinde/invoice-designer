@@ -2,7 +2,6 @@
 .view-clients {
     display: flex;
     flex-direction: column;
-    /*elementos en columna*/
     gap: 20px;
 }
 
@@ -12,11 +11,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 15px;
     background: linear-gradient(to bottom,
             /* Color degradado*/
             var(--color-gradient-start),
-            var(--color-gradient-end));
+            var(--color-primary-hover));
 }
 
 /*titulo clientes*/
@@ -55,15 +54,14 @@
 /*tabla*/
 .view-clients table {
     width: 100%;
-    border-collapse: collapse;
-    /*quitar separacion columnas*/
+    border-collapse: collapse;/*quitar separacion columnas*/
 }
 
 /*cabecera tabla*/
 .view-clients table th {
-    padding: 10px;
+    padding: 20px;
     text-align: center;
-    background: var(--color-gradient-end);
+    background: var(--color-primary-hover);
 }
 
 /*celdas tabla*/
@@ -75,7 +73,7 @@
 
 /*linea de separacion*/
 .view-clients table tbody tr:not(:last-child) td {
-    border-bottom: 1px solid var(--color-gradient-end);
+    border-bottom: 1px solid var(--color-primary-hover);
 }
 
 /*hover para la fila seleccionada*/
@@ -87,7 +85,7 @@
 .view-clients table tbody button.btn-edit {
     padding: 6px;
     color: var(--color-text);
-    background-color: var(--color-gradient-end);
+    background-color: var(--color-primary-hover);
 }
 
 /*hover boton editar*/
@@ -100,7 +98,7 @@
 .view-clients table tbody button.btn-delete {
     padding: 6px;
     color: var(--color-text);
-    background-color: var(--color-gradient-end);
+    background-color: var(--color-primary-hover);
 }
 
 /*hover boton eliminar*/
