@@ -1,0 +1,219 @@
+/*productos*/
+.view-products {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*cabecera productos*/
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom,
+            /* Color degradado*/
+            var(--color-gradient-start),
+            var(--color-gradient-end));
+}
+
+/*titulo productos*/
+.view-products h1 {
+    font-size: 30px;
+    color: var(--color-text);
+}
+
+/*boton nuevo producto*/
+.view-products button {
+    border: none;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-text);
+    color: var(--color-btn-text);
+    cursor: pointer;
+}
+
+/*hover boton añadir producto*/
+.view-products button:hover {
+    background-color: var(--color-btn-hover);
+}
+
+/*contenedor tabla*/
+.view-products .table-products {
+    border-radius: 15px;
+    overflow: auto;
+    margin-left: -15px;
+    margin-right: -15px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-card);
+}
+
+/*tabla*/
+.view-products table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/*cabecera tabla*/
+.view-products table th {
+    padding: 10px;
+    text-align: center;
+    background: var(--color-gradient-end);
+}
+
+/*celdas tabla*/
+.view-products table td {
+    padding: 5px 10px;
+    text-align: center;
+    background: var(--color-card);
+}
+
+/*linea de separacion*/
+.view-products table tbody tr:not(:last-child) td {
+    border-bottom: 1px solid var(--color-gradient-end);
+}
+
+/*hover para la fila seleccionada*/
+.view-products table tbody tr:hover td {
+    background-color: var(--color-gradient-end);
+}
+
+/*boton editar de tabla*/
+.view-products table tbody button.btn-edit {
+    padding: 6px;
+    color: var(--color-text);
+    background-color: var(--color-gradient-end);
+}
+
+/*boton editar de tabla (hover)*/
+.view-products table tbody button.btn-edit:hover {
+    padding: 6px;
+    background-color: var(--color-btn-edit-hover);
+}
+
+/*boton eliminar de tabla*/
+.view-products table tbody button.btn-delete {
+    padding: 6px;
+    color: var(--color-text);
+    background-color: var(--color-gradient-end);
+}
+
+/*boton eliminar de tabla (hover)*/
+.view-products table tbody button.btn-delete:hover {
+    padding: 6px;
+    background-color: var(--color-btn-delete-hover);
+}
+
+/*fomulario*/
+.view-products .form-products {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 10px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90%;
+    overflow-y: auto;
+    background-color: var(--color-gradient-end);
+}
+
+/*cabecera formulario*/
+.view-products .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 20px;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-text);
+}
+
+/*boton cabecera formulario*/
+.view-products .form-header button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: var(--color-text);
+}
+
+/*body del formulario*/
+.view-products .form-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    gap: 15px;
+}
+
+/*labels e inputs del formulario*/
+.view-products .form-group {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*estilos de los input*/
+.view-products .form-group input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+/*estilo del select de pais*/
+.view-products .form-group select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+/*linea de separacion entre campos y botones*/
+.view-products .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 10px;
+    border-top: 1px solid var(--color-text);
+}
+
+/*botones del formulario*/
+.view-products .form-footer button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-text);
+    color: var(--color-btn-text);
+}
+
+/*boton cancelar del formulario (hover)*/
+.view-products .form-footer button.btn-cancel {
+    color: var(--color-text);
+    background-color: var(--color-primary-hover);
+}
+
+/*boton cancel del formulario /hover)*/
+.view-products .form-footer button.btn-cancel:hover {
+    background-color: var(--color-btn-delete-hover);
+}
+
+/*boton save del formulario (hover)*/
+.view-products .form-footer button.btn-save:hover {
+    background-color: var(--color-btn-edit-hover);
+}
+
+/*fondo para el modal*/
+.view-products .modal-products {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
