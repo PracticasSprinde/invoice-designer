@@ -1,3 +1,127 @@
-<div class="view-invoices">
-    <p>Aquí irá la lista de facturas</p>
+</div><div class="view-invoices">
+
+    <!-- titulo y botón -->
+    <div class="invoices-header">
+        <h1>Facturas</h1>
+
+        <!-- boton para crear factura -->
+        <button type="button" class="new-invoice" title="Crear factura">
+            <i class="bi bi-file-earmark-plus"></i>
+            Crear factura
+        </button>
+    </div>
+
+
+    <!-- modal de facturas -->
+    <div class="modal-invoices">
+        <!-- formulario facturas -->
+        <div class="form-invoices">
+            <div class="form-header">
+                <h2>Nueva Factura</h2>
+                <button type="button" class="btn-close-modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+            </div>
+
+            <!-- campos del formulario -->
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="template">Plantilla</label>
+                    <select id="template">
+                        <option value="T1">Plantilla 1</option>
+                        <option value="T2">Plantilla 2</option>
+                        <option value="T3">Plantilla 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="title">Titulo de la factura</label>
+                    <input type="text" id="title">
+                </div>
+                <div class="form-group">
+                    <label for="number">Numero</label>
+                    <input type="text" id="number">
+                </div>
+                <div class="form-group">
+                    <label for="date">Fecha</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="issuer">Emisor</label>
+                    <input type="text" id="issuer">
+                </div>
+                <div class="form-group">
+                    <label for="client">Cliente</label>
+                    <select id="client">
+                        <option value="01">Ana</option>
+                        <option value="02">Carlos</option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <!-- botones del formulario -->
+            <div class="form-footer">
+                <button type="button" class="btn-cancel">
+                    <i class="bi bi-x-lg"></i>
+                    Cancelar
+                </button>
+                <button type="button" class="btn-save">
+                    <i class="bi bi-save"></i>
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- tabla de facturas -->
+    <section>
+        <div class="table-invoices">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Numero</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>18/11/2026</td>
+                        <td>Ana</td>
+                        <td>300,95</td>
+                        <td>
+                            <button type="button" class="btn-edit" title="Editar">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn-delete" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>15/11/2026</td>
+                        <td>Carlos</td>
+                        <td>50,45</td>
+                        <td>
+                            <button type="button" class="btn-edit" title="Editar">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn-delete" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
 </div>
