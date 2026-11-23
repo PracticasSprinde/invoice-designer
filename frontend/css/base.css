@@ -28,6 +28,7 @@
     --color-btn-edit-hover: #7C9CEB;
     --color-btn-delete-hover: #D47E7E;  
 
+    /* tipo de fuente de la app */
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 

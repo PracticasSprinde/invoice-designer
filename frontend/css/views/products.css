@@ -83,27 +83,25 @@
 
 /*boton editar de tabla*/
 .view-products table tbody button.btn-edit {
-    padding: 6px;
+    padding: 8px 12px;
     color: var(--color-text);
     background-color: var(--color-primary-hover);
 }
 
 /*boton editar de tabla (hover)*/
 .view-products table tbody button.btn-edit:hover {
-    padding: 6px;
     background-color: var(--color-btn-edit-hover);
 }
 
 /*boton eliminar de tabla*/
 .view-products table tbody button.btn-delete {
-    padding: 6px;
+    padding: 8px 12px;
     color: var(--color-text);
     background-color: var(--color-primary-hover);
 }
 
 /*boton eliminar de tabla (hover)*/
 .view-products table tbody button.btn-delete:hover {
-    padding: 6px;
     background-color: var(--color-btn-delete-hover);
 }
 

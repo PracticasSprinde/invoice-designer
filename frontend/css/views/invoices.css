@@ -5,7 +5,7 @@
     gap: 20px;
 }
 
-/*cabecera clients*/
+/*cabecera facturas*/
 .invoices-header {
     display: flex;
     justify-content: space-between;
@@ -18,7 +18,7 @@
             var(--color-primary-hover));
 }
 
-/*titulo clientes*/
+/*titulo facturas*/
 .view-invoices h1 {
     font-size: 30px;
     color: var(--color-text);
@@ -36,7 +36,7 @@
     cursor: pointer;
 }
 
-/*Hover del boton añadir cliente*/
+/*Hover del boton añadir factura*/
 .view-invoices button:hover {
     background-color: var(--color-btn-hover);
 }
@@ -83,27 +83,25 @@
 
 /*boton editar de tabla*/
 .view-invoices table tbody button.btn-edit {
-    padding: 6px;
+    padding: 8px 12px;
     color: var(--color-text);
     background-color: var(--color-primary-hover);
 }
 
 /*hover boton editar*/
 .view-invoices table tbody button.btn-edit:hover {
-    padding: 6px;
     background-color: var(--color-btn-edit-hover);
 }
 
 /*boton eliminar de tabla*/
 .view-invoices table tbody button.btn-delete {
-    padding: 6px;
+    padding: 8px 12px;
     color: var(--color-text);
     background-color: var(--color-primary-hover);
 }
 
 /*hover boton eliminar*/
 .view-invoices table tbody button.btn-delete:hover {
-    padding: 6px;
     background-color: var(--color-btn-delete-hover);
 }
 

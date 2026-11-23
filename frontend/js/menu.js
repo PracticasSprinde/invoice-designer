@@ -4,6 +4,9 @@ async function loadView(name) {
   const html = await response.text();
   document.getElementById("view").innerHTML = html; // Busca elemento HTML con etiqueta "view"
 
+  // Activar el sidebar reducido únicamente en el editor
+  document.querySelector(".app").classList.toggle("editor-active", name === "editor");
+
   // Inicializar la vista de clientes
   if (name === "clients") {
     initClients();

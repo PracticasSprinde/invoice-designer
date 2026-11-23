@@ -12,22 +12,18 @@
     
 }
 
-/*cabecera del contenido principal*/
-.content header {
-    margin-bottom: 15px; /*espacio debajo*/
-}
-
-/*estilo al titulo h2*/
-.content header h2 {
-    padding: 10px; /*espacio alrededor del título*/
-    margin: 0; 
-    font-size: 24px;
-    background-color: transparent;
-}
 
 /*seccion del contenido*/
 .content section {
     padding: 20px; /*espacio alrededor*/
     min-width: 0; /*se reduce al espacio disponible*/
+    min-height: 0;
     flex: 1;
+}
+
+/*contenedor flexible*/
+#view {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
