@@ -1,0 +1,197 @@
+/* vista de plantillas */
+.view-templates {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*cabecera plantillas*/
+.templates-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(to bottom,
+            /* Color degradado*/
+            var(--color-gradient-start),
+            var(--color-primary-hover));
+}
+
+/*titulo plantillas*/
+.view-templates h1 {
+    font-size: 30px;
+    color: var(--color-text);
+}
+
+/*boton crear plantilla*/
+.new-template {
+    border: none;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-text);
+    color: var(--color-btn-text);
+    cursor: pointer;
+}
+
+/*hover del boton crear plantilla*/
+.new-template:hover {
+    background-color: var(--color-btn-hover);
+}
+
+/* cabecera de la selección */
+.templates-section .section-header {
+    margin-bottom: 20px;
+}
+
+/*titulo plantillas*/
+.templates-section .section-header h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+/* linea inferior */
+.templates-section .section-header hr {
+    border: none;
+    margin-top: 10px;
+    border-top: 1px solid var(--color-border);
+}
+
+/* cuadricula de las tajetas */
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* tarjeta de plantilla */
+.template-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: var(--color-gradient-end);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* vista previa plantilla*/
+.template-preview {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+}
+
+/* informacion plantilla*/
+.template-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* nombre plantilla */
+.template-info h4 {
+    font-size: 18px;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* estado plantilla */
+.template-info span {
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+
+/* acciones de la plantilla */
+.template-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* botones de acciones */
+.template-actions button {
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* botones de editar */
+.template-actions button.btn-edit-template {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
+    background-color: var(--color-primary-hover);
+}
+
+/* botones de editar (hover) */
+.template-actions button.btn-edit-template:hover {
+    background-color: var(--color-btn-edit-hover);
+}
+
+/* botones de eliminar */
+.template-actions button.btn-delete-template {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    color: var(--color-text);
+    background-color: var(--color-primary-hover);
+}
+
+/* botones de eliminar (hover) */
+.template-actions button.btn-delete-template:hover {
+    background-color: var(--color-btn-delete-hover);
+}
+
+/* contenedor hoja miniatura */
+.template-preview {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+}
+
+/* hoja miniatura */
+.template-sheet {
+    width: 70%;
+    height: 90%;
+    padding: 15px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-card);
+}
+
+/* titulo miniatura */
+.template-sheet h5 {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--color-text);
+}
+
+/* lineas miniatura */
+.template-sheet-line {
+    width: 100%;
+    height: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: var(--color-text);
+}
+
