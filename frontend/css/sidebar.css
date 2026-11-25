@@ -83,13 +83,14 @@
 
 /* estilo del enlace activo */
 .sidebar nav a.active {
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-card);
     font-weight: 600;
+    box-shadow: 0 3px 6px var(--color-gradient-start);
 }
 
 /*estilo al pasar el raton encima*/
 .sidebar nav a:hover {
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-card);
     color: var(--color-text);
 }
 

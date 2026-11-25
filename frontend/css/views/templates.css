@@ -11,11 +11,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-radius: 15px;
-    background: linear-gradient(to bottom,
-            /* Color degradado*/
-            var(--color-gradient-start),
-            var(--color-primary-hover));
+    background: transparent;
+    border-bottom: 3px solid var(--color-gradient-start);
 }
 
 /*titulo plantillas*/
@@ -29,10 +26,10 @@
     border: none;
     padding: 20px;
     font-size: 18px;
+    font-weight: bold;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-    background-color: var(--color-text);
-    color: var(--color-btn-text);
+    background-color: var(--color-gradient-start);
+    color: var(--color-text);
     cursor: pointer;
 }
 
@@ -41,29 +38,10 @@
     background-color: var(--color-btn-hover);
 }
 
-/* cabecera de la selección */
-.templates-section .section-header {
-    margin-bottom: 20px;
-}
-
-/*titulo plantillas*/
-.templates-section .section-header h3 {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--color-text);
-}
-
-/* linea inferior */
-.templates-section .section-header hr {
-    border: none;
-    margin-top: 10px;
-    border-top: 1px solid var(--color-border);
-}
-
 /* cuadricula de las tajetas */
 .templates-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 280px));
     gap: 20px;
 }
 
@@ -74,17 +52,8 @@
     gap: 15px;
     padding: 20px;
     border-radius: 15px;
-    background-color: var(--color-gradient-end);
+    background-color: var(--color-gradient-soft);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* vista previa plantilla*/
-.template-preview {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-    background-color: var(--color-card);
-    border: 1px solid var(--color-border);
 }
 
 /* informacion plantilla*/
@@ -122,54 +91,29 @@
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
+    border: 1px solid var(--color-primary-hover-2);
+    background-color: var(--color-card);
 }
 
-/* botones de editar */
-.template-actions button.btn-edit-template {
-    padding: 8px 12px;
-    border: 2px solid var(--color-card);
-    border-radius: 6px;
-    font-size: 16px;
-    color: var(--color-text);
-    background-color: var(--color-gradient-end);
-}
-
-/* botones de editar (hover) */
+/* boton de editar (hover) */
 .template-actions button.btn-edit-template:hover {
+    border-color: transparent;
     background-color: var(--color-btn-edit-hover);
 }
 
-/* botones de eliminar */
-.template-actions button.btn-delete-template {
-    padding: 8px 12px;
-    border: 2px solid var(--color-card);
-    border-radius: 6px;
-    font-size: 16px;
-    color: var(--color-text);
-    background-color: var(--color-gradient-end);
-}
-
-/* botones de eliminar (hover) */
+/* boton de eliminar (hover) */
 .template-actions button.btn-delete-template:hover {
+    border-color: transparent;
     background-color: var(--color-btn-delete-hover);
 }
 
-/* contenedor hoja miniatura */
-.template-preview {
-    width: 100%;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background-color: var(--color-card);
-    border: 1px solid var(--color-border);
-}
 
 /* hoja miniatura */
 .template-sheet {
     width: 70%;
     height: 90%;
+    margin: 0 auto;
+    aspect-ratio: 210 / 297;
     padding: 15px;
     border-radius: 3px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);

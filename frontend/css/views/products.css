@@ -11,11 +11,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    border-radius: 15px;
-    background: linear-gradient(to bottom,
-            /* Color degradado*/
-            var(--color-gradient-start),
-            var(--color-primary-hover));
+    border-bottom: 3px solid var(--color-gradient-start);
 }
 
 /*titulo productos*/
@@ -29,9 +25,10 @@
     border: none;
     padding: 20px;
     font-size: 18px;
+    font-weight: bold;
     border-radius: 10px;
-    background-color: var(--color-text);
-    color: var(--color-btn-text);
+    background-color: var(--color-gradient-start);
+    color: var(--color-text);
     cursor: pointer;
 }
 
@@ -81,26 +78,22 @@
 }
 
 /*boton editar de tabla*/
-.view-products table tbody button.btn-edit {
+.view-products table tbody button.btn-edit,
+.view-products table tbody button.btn-delete {
     padding: 8px 12px;
-    color: var(--color-text);
-    background-color: var(--color-primary-hover);
+    background-color: transparent;
+    color: var(--color-text-muted);
 }
 
 /*boton editar de tabla (hover)*/
 .view-products table tbody button.btn-edit:hover {
+    color: var(--color-card);
     background-color: var(--color-btn-edit-hover);
-}
-
-/*boton eliminar de tabla*/
-.view-products table tbody button.btn-delete {
-    padding: 8px 12px;
-    color: var(--color-text);
-    background-color: var(--color-primary-hover);
 }
 
 /*boton eliminar de tabla (hover)*/
 .view-products table tbody button.btn-delete:hover {
+    color: var(--color-card);
     background-color: var(--color-btn-delete-hover);
 }
 
@@ -125,7 +118,7 @@
     padding: 0 10px;
     font-size: 20px;
     color: var(--color-text);
-    border-bottom: 1px solid var(--color-text);
+    border-bottom: 1px solid var(--color-primary-hover-2);
 }
 
 /*boton cabecera formulario*/
@@ -135,7 +128,13 @@
     align-items: center;
     padding: 8px;
     border-radius: 10px;
-    background-color: var(--color-text);
+    border: 1px solid var(--color-primary-hover-2);
+    background-color: var(--color-card);
+}
+
+.view-products .form-header button:hover {
+    border-color: transparent;
+    background-color: var(--color-primary-hover-2);
 }
 
 /*body del formulario*/
@@ -153,18 +152,21 @@
     flex-direction: column;
 }
 
-/*estilos de los input*/
-.view-products .form-group input {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--color-border);
-}
-
-/*estilo del select de pais*/
+/* Estilos de los inputs y selects */
+.view-products .form-group input,
 .view-products .form-group select {
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-primary-hover);
+    outline: none;
+}
+
+/* Focus de los inputs y selects */
+.view-products .form-group input:focus,
+.view-products .form-group select:focus {
+    border-color: var(--color-primary-hover);
+    box-shadow: 0 0 0 3px rgba(161, 126, 255, 0.20);
+    outline: none;
 }
 
 /*linea de separacion entre campos y botones*/
@@ -173,7 +175,7 @@
     justify-content: flex-end;
     gap: 10px;
     padding: 20px 10px;
-    border-top: 1px solid var(--color-text);
+    border-top: 1px solid var(--color-primary-hover-2);
 }
 
 /*botones del formulario*/
@@ -181,24 +183,31 @@
     padding: 10px;
     font-size: 16px;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-    background-color: var(--color-text);
+    border: 1px solid var(--color-primary-hover-2);
     color: var(--color-btn-text);
 }
 
 /*boton cancelar del formulario (hover)*/
 .view-products .form-footer button.btn-cancel {
     color: var(--color-text);
-    background-color: var(--color-primary-hover);
+    background-color: var(--color-gradient-end);
 }
 
 /*boton cancel del formulario /hover)*/
 .view-products .form-footer button.btn-cancel:hover {
+    border-color: transparent;
     background-color: var(--color-btn-delete-hover);
+}
+
+/* boton guardar del formulario*/
+.view-products .form-footer button.btn-save {
+    color: var(--color-text);
+    background-color: var(--color-card);
 }
 
 /*boton save del formulario (hover)*/
 .view-products .form-footer button.btn-save:hover {
+    border-color: transparent;
     background-color: var(--color-btn-edit-hover);
 }
 

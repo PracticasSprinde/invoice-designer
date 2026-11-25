@@ -3,31 +3,30 @@
 /* Colores generales de la aplicación */
 :root {
     /* Fondo general y barra lateral un poco más definidos */
-    --color-primary: #EAECEF;        
-    --color-primary-hover: #CBD5E1; 
-    --color-background: #EAECEF;     
-    --color-card: #FFFFFF;           
-    
-    /* Títulos y texto */        
-    --color-text: #334155;           
-    --color-text-muted: #64748B;     
-    
+    --color-primary: #EAECEF;
+    --color-primary-hover: #CBD5E1;
+    --color-primary-hover-2: #94A3B8;
+    --color-background: #EAECEF;
+    --color-card: #FFFFFF;
+    --color-hover-row:#F4F4F5;
+
+    /* Títulos y texto */
+    --color-text:#27272A;
+    --color-text-muted: #64748B;
+
     /* Bordes */
-    --color-border: #CBD5E1;         
-    
-    /* Cabecera */
-    --color-gradient-start: #FFFFFF; 
+    --color-border: #CBD5E1;
+    --color-gradient-start: #D8CFFE;
+    --color-gradient-soft: #EDE9FE;
     --color-gradient-end: #E2E8F0;
-    
+
     /* Botónes */
-    --color-btn: #1E293B;            
-    --color-btn-hover: #475569;      
-    --color-btn-text: #FFFFFF;
+    --color-btn-hover: #C4AEFF;
 
     /* Botones tabla */
     --color-btn-edit-hover: #7C9CEB;
-    --color-btn-delete-hover: #D47E7E; 
-    --color-btn-pdf-hover: #6FB99A; 
+    --color-btn-delete-hover: #D47E7E;
+    --color-btn-pdf-hover: #6FB99A;
 
     /* tipo de fuente de la app */
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -36,17 +35,21 @@
 /* Configuracion del index*/
 * {
     box-sizing: border-box;
+    font-family: var(--font-ui);
 }
 
 /* Configuracion del body*/
 body {
     margin: 0;
-    font-family: var(--font-ui);
 }
 
 /*configuracion de app*/
 .app {
-    display: flex;/*coloca los hijos uno al alado del otro*/
+    display: flex; /*coloca los hijos uno al alado del otro*/
     min-height: 100vh;/*alto completo de ventana del navegador*/
-    background: var(--color-gradient-end);
+    background: linear-gradient(135deg,
+            var(--color-gradient-end) 0%,
+            var(--color-gradient-end) 25%,
+            var(--color-gradient-soft) 55%,
+            var(--color-gradient-start) 100%);
 }
