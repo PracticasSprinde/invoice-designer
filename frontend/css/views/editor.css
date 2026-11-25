@@ -32,26 +32,23 @@
 
 /* boton volver cabecera editor */
 .editor-actions .btn-back-editor{
-    border: 1px solid var(--color-text);
+    border: 1px solid var(--color-text-muted);
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     background-color: var(--color-gradient-end);
 }
 
 /* boton volver cabecera editor (hover)*/
 .editor-actions .btn-back-editor:hover{
-    transition: background-color 0.2s ease;
     color: var(--color-card);
     background-color: var(--color-btn-delete-hover);
 }
 
 /* boton guardar cabecera editor */
 .editor-actions .btn-save-template{
-    border: 1px solid var(--color-text);
+    border: none;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     color: var(--color-card);
     background-color: var(--color-text);
 }
@@ -77,8 +74,8 @@
 
 /* campo nombre de plantilla (focus) */
 .editor-name input:focus {
-    border-color: var(--color-btn-edit-hover);
-    box-shadow: 0 0 0 3px rgba(82, 120, 217, 0.15);
+    border-color: var(--color-text-muted);
+    box-shadow: 0 0 0 3px rgba(82, 120, 217, 0.20);
     outline: none;
 }
 

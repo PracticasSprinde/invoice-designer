@@ -26,7 +26,8 @@
 
     /* Botones tabla */
     --color-btn-edit-hover: #7C9CEB;
-    --color-btn-delete-hover: #D47E7E;  
+    --color-btn-delete-hover: #D47E7E; 
+    --color-btn-pdf-hover: #6FB99A; 
 
     /* tipo de fuente de la app */
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
