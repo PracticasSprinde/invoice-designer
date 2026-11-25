@@ -7,7 +7,7 @@
         <!-- boton para crear factura -->
         <button type="button" class="new-invoice" title="Crear factura">
             <i class="bi bi-plus"></i>
-            Crear factura
+            <span>Crear factura</span>
         </button>
     </div>
 
@@ -18,7 +18,7 @@
         <div class="form-invoices">
             <div class="form-header">
                 <h2>Nueva Factura</h2>
-                <button type="button" class="btn-close-modal">
+                <button type="button" class="btn-close-modal" title="Cerrar">
                     <i class="bi bi-x-lg"></i>
                 </button>
 
@@ -58,13 +58,13 @@
 
             <!-- botones del formulario -->
             <div class="form-footer">
-                <button type="button" class="btn-cancel">
+                <button type="button" class="btn-cancel" title="Cancelar">
                     <i class="bi bi-x-lg"></i>
-                    Cancelar
+                    <span>Cancelar</span>
                 </button>
-                <button type="button" class="btn-save">
+                <button type="button" class="btn-save" title="Guardar">
                     <i class="bi bi-save"></i>
-                    Guardar
+                    <span>Guardar</span>
                 </button>
             </div>
         </div>
@@ -98,6 +98,9 @@
                             <button type="button" class="btn-delete" title="Eliminar">
                                 <i class="bi bi-trash"></i>
                             </button>
+                            <button type="button" class="btn-pdf" title="Descargar PDF">
+                                <i class="bi bi-file-pdf"></i>
+                            </button>
                         </td>
                     </tr>
                     <tr>
@@ -106,11 +109,14 @@
                         <td>Carlos</td>
                         <td>50,45</td>
                         <td>
-                            <button type="button" class="btn-edit" title="Editar">
+                            <button type="button" class="btn-edit" title="Ver">
                                 <i class="bi bi-eye"></i>
                             </button>
                             <button type="button" class="btn-delete" title="Eliminar">
                                 <i class="bi bi-trash"></i>
+                            </button>
+                            <button type="button" class="btn-pdf" title="Descargar PDF">
+                                <i class="bi bi-file-pdf"></i>
                             </button>
                         </td>
                     </tr>

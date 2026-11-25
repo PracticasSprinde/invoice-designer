@@ -2,137 +2,151 @@
     <!-- cabecera editor -->
     <header class="editor-header">
 
-        <h2>Editor</h2>
-
+        <!-- botones -->
         <div class="editor-actions">
 
-            <!-- boton volver -->
-        <button type="button" class="btn-back-editor" title="Volver">
-            <i class="bi bi-arrow-bar-left"></i>
-            Volver
-        </button>
+            <!-- botones de historial -->
+            <div class="editor-history">
 
-        <!-- nombre plantilla -->
-        <div class="editor-name">
-            <input type="text" class="form-control" value="Plantilla básica">
+                <!-- boton deshacer -->
+                <button type="button" class="btn-undo" title="Deshacer">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                </button>
+
+                <!-- boton rehacer -->
+                <button type="button" class="btn-redo" title="Rehacer">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
+
+                <!-- boton eliminar -->
+                <button type="button" class="btn-delete" title="Eliminar">
+                    <i class="bi bi-trash"></i>
+                </button>
+
+            </div>
+
+            <!-- botones de acciones -->
+            <div class="editor-controls">
+
+                <!-- boton volver -->
+                <button type="button" class="btn-back-editor" title="Volver">
+                    <i class="bi bi-arrow-bar-left"></i>
+                    <span>Volver</span>
+                </button>
+
+                <!-- nombre plantilla -->
+                <input type="text" class="form-control" value="Plantilla básica">
+
+                <!-- boton guardar -->
+                <button type="button" class="btn-save-template" title="Guardar">
+                    <i class="bi bi-save"></i>
+                    <span>Guardar</span>
+                </button>
+            </div>
+
         </div>
-
-        <!-- boton guardar -->
-        <button type="button" class="btn-save-template" title="Guardar">
-            <i class="bi bi-save"></i>
-            Guardar
-        </button>
-
-
-        </div>
-
-        
 
     </header>
 
     <!-- panel editor -->
     <div class="editor-content">
 
-        <!-- panel herramientas -->
-        <aside class="editor-tools">
-            <h3>Elementos</h3>
+        <!-- barra propiedades -->
+        <div class="editor-properties" id="editor-bar">
+            <span class="properties-empty">
+                Selecciona un elemento de la hoja para editar sus propiedades
+            </span>
+        </div>
 
-            <!-- lista herramientas -->
-            <div class="tools-list">
+        <div class="editor-main">
 
-                <!-- texto -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-type"></i>
-                    <span>Texto</span>
-                </button>
+            <!-- panel herramientas -->
+            <aside class="editor-tools">
+                <h3>Elementos</h3>
 
-                <!-- logo -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-image"></i>
-                    <span>Logo</span>
-                </button>
+                <!-- lista herramientas -->
+                <div class="tools-list">
 
-                <!-- emisor -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-person"></i>
-                    <span>Emisor</span>
-                </button>
+                    <!-- texto -->
+                    <button type="button" class="tool-button" title="Texto">
+                        <i class="bi bi-type"></i>
+                        <span>Texto</span>
+                    </button>
 
-                <!-- cliente -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-person-vcard"></i>
-                    <span>Cliente</span>
-                </button>
+                    <!-- logo -->
+                    <button type="button" class="tool-button" title="Logo">
+                        <i class="bi bi-image"></i>
+                        <span>Logo</span>
+                    </button>
 
-                <!-- fecha -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-calendar"></i>
-                    <span>Fecha</span>
-                </button>
+                    <!-- emisor -->
+                    <button type="button" class="tool-button" title="Emisor">
+                        <i class="bi bi-person"></i>
+                        <span>Emisor</span>
+                    </button>
 
-                <!-- numero factura -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-hash"></i>
-                    <span>Número</span>
-                </button>
+                    <!-- cliente -->
+                    <button type="button" class="tool-button" title="Cliente">
+                        <i class="bi bi-person-vcard"></i>
+                        <span>Cliente</span>
+                    </button>
 
-                <!-- separador -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-hr"></i>
-                    <span>Separador</span>
-                </button>
+                    <!-- fecha -->
+                    <button type="button" class="tool-button" title="Fecha">
+                        <i class="bi bi-calendar"></i>
+                        <span>Fecha</span>
+                    </button>
 
-                <!-- conceptos -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-table"></i>
-                    <span>Conceptos</span>
-                </button>
+                    <!-- numero factura -->
+                    <button type="button" class="tool-button" title="Número">
+                        <i class="bi bi-hash"></i>
+                        <span>Número</span>
+                    </button>
 
-                <!-- iva -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-percent"></i>
-                    <span>Desglose IVA</span>
-                </button>
+                    <!-- separador -->
+                    <button type="button" class="tool-button" title="Separador">
+                        <i class="bi bi-hr"></i>
+                        <span>Separador</span>
+                    </button>
 
-                <!-- resumen -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-calculator"></i>
-                    <span>Resumen</span>
-                </button>
+                    <!-- conceptos -->
+                    <button type="button" class="tool-button" title="Conceptos">
+                        <i class="bi bi-table"></i>
+                        <span>Conceptos</span>
+                    </button>
 
-                <!-- notas -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-sticky"></i>
-                    <span>Notas</span>
-                </button>
+                    <!-- iva -->
+                    <button type="button" class="tool-button" title="Desglose IVA">
+                        <i class="bi bi-percent"></i>
+                        <span>Desglose IVA</span>
+                    </button>
 
-                <!-- numero de pagina -->
-                <button type="button" class="tool-button">
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Página</span>
-                </button>
+                    <!-- resumen -->
+                    <button type="button" class="tool-button" title="Resumen">
+                        <i class="bi bi-calculator"></i>
+                        <span>Resumen</span>
+                    </button>
 
-            </div>
+                    <!-- notas -->
+                    <button type="button" class="tool-button" title="Notas">
+                        <i class="bi bi-sticky"></i>
+                        <span>Notas</span>
+                    </button>
+                </div>
 
-        </aside>
+            </aside>
 
-        <!-- zona de trabajo -->
-        <main class="editor-workspace">
+            <!-- zona de trabajo -->
+            <main class="editor-workspace">
 
-            <!-- hoja factura -->
-            <div class="invoice-sheet">
+                <!-- hoja factura -->
+                <div class="invoice-sheet">
 
-                <h2 class="invoice-title">FACTURA</h2>
+                </div>
 
-            </div>
+            </main>
 
-        </main>
-
-        <!-- panel propiedades -->
-        <aside class="editor-properties">
-            <h3>Propiedades</h3>
-            <p class="properties-empty">Selecciona un elemento de la hoja para editar sus propiedades</p>
-        </aside>
+        </div>
 
     </div>
 
