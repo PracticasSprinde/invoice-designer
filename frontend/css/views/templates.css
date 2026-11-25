@@ -28,8 +28,10 @@
     font-size: 18px;
     font-weight: bold;
     border-radius: 10px;
-    background-color: var(--color-gradient-start);
+    background-color: var(--color-card);
     color: var(--color-text);
+    border: 2px solid var(--color-btn-hover);
+    box-shadow: 0 6px 5px var(--color-btn-hover);
     cursor: pointer;
 }
 
@@ -91,7 +93,7 @@
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
-    border: 1px solid var(--color-primary-hover-2);
+    border: 1px solid var(--color-btn-hover);
     background-color: var(--color-card);
 }
 

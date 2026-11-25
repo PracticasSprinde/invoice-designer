@@ -22,26 +22,28 @@
     color: var(--color-text);
 }
 
-/*boton*/
-.view-invoices button {
+/*boton crear factura*/
+.view-invoices .new-invoice {
     border: none;
     padding: 20px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 10px;
-    background-color: var(--color-gradient-start);
+    background-color: var(--color-card);
     color: var(--color-text);
+    border: 2px solid var(--color-btn-hover);
+    box-shadow: 0 6px 5px var(--color-btn-hover);
     cursor: pointer;
 }
 
-/*Hover del boton añadir factura*/
-.view-invoices button:hover {
+/*Hover del boton crear factura*/
+.view-invoices .new-invoice:hover {
     background-color: var(--color-btn-hover);
 }
 
 /*contenedor de la tabla*/
 .view-invoices .table-invoices {
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: auto;
     margin-left: -15px;
     margin-right: -15px;
@@ -76,16 +78,22 @@
 
 /*hover para la fila seleccionada*/
 .view-invoices table tbody tr:hover td {
-    background-color: var(--color-gradient-end);
+    background-color: var(--color-hover-row);
 }
 
 /*boton editar de tabla*/
 .view-invoices table tbody button.btn-edit,
 .view-invoices table tbody button.btn-delete,
-.view-invoices table tbody button.btn-pdf{
+.view-invoices table tbody button.btn-pdf {
     padding: 8px 12px;
+    font-size: 16px;
+    font-weight: normal;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
     background-color: transparent;
     color: var(--color-text-muted);
+    cursor: pointer;
 }
 
 /*hover boton editar*/

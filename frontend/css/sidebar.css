@@ -85,7 +85,7 @@
 .sidebar nav a.active {
     background-color: var(--color-card);
     font-weight: 600;
-    box-shadow: 0 3px 6px var(--color-gradient-start);
+    box-shadow: 0 6px 5px var(--color-btn-hover);
 }
 
 /*estilo al pasar el raton encima*/

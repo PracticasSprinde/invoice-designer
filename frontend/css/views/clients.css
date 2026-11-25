@@ -20,26 +20,28 @@
     color: var(--color-text);
 }
 
-/*boton*/
-.view-clients button {
+/*boton añadir cliente*/
+.view-clients .new-client {
     border: none;
     padding: 20px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 10px;
-    background-color: var(--color-gradient-start);
+    background-color: var(--color-card);
     color: var(--color-text);
+    border: 2px solid var(--color-btn-hover);
+    box-shadow: 0 6px 5px var(--color-btn-hover);
     cursor: pointer;
 }
 
 /*Hover del boton añadir cliente*/
-.view-clients button:hover {
+.view-clients .new-client:hover {
     background-color: var(--color-btn-hover);
 }
 
 /*contenedor de la tabla*/
 .view-clients .table-clients {
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: auto;
     margin-left: -15px;
     margin-right: -15px;
@@ -81,8 +83,14 @@
 .view-clients table tbody button.btn-edit,
 .view-clients table tbody button.btn-delete{
     padding: 8px 12px;
+    font-size: 16px;
+    font-weight: normal;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
     background-color: transparent;
     color: var(--color-text-muted);
+    cursor: pointer;
 }
 
 /*hover boton editar*/
@@ -127,7 +135,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid var(--color-primary-hover-2);
     background-color: var(--color-card);
 }
@@ -136,7 +144,6 @@
     border-color: transparent;
     background-color: var(--color-primary-hover-2);
 }
-
 
 /*labels e inputs del formulario*/
 .view-clients .form-body {
