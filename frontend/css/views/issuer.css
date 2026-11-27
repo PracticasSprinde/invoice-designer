@@ -19,10 +19,6 @@
     color: var(--color-text);
 }
 
-.view-issuer .form-issuer {
-    margin: 0 auto;
-}
-
 /*fomulario*/
 .view-issuer .form-issuer {
     display: flex;
@@ -33,6 +29,7 @@
     max-width: 900px;
     max-height: 90%;
     overflow-y: auto;
+    margin: 0 auto;
     background-color: var(--color-gradient-end);
 }
 
@@ -68,6 +65,7 @@
     outline: none;
 }
 
+/* pie del formulario */
 .view-issuer .form-footer {
     display: flex;
     justify-content: flex-end;
@@ -86,7 +84,7 @@
 /*boton guardar datos*/
 .view-issuer button {
     border: none;
-    padding: 20px;
+    padding: 15px;
     font-size: 18px;
     font-weight: bold;
     border-radius: 10px;
@@ -96,7 +94,7 @@
     cursor: pointer;
 }
 
-/*Hover del boton añadir cliente*/
+/*Hover del boton guardar*/
 .view-issuer button:hover {
     background-color: var(--color-btn-hover);
 }
