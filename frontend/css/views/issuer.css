@@ -1,0 +1,102 @@
+.view-issuer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*cabecera emisor*/
+.issuer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 3px solid var(--color-gradient-start);
+}
+
+/*titulo emisor*/
+.view-issuer h1 {
+    font-size: 30px;
+    color: var(--color-text);
+}
+
+.view-issuer .form-issuer {
+    margin: 0 auto;
+}
+
+/*fomulario*/
+.view-issuer .form-issuer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90%;
+    overflow-y: auto;
+    background-color: var(--color-gradient-end);
+}
+
+/*labels e inputs del formulario*/
+.view-issuer .form-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    gap: 15px;
+}
+
+/*labels e inputs del formulario*/
+.view-issuer .form-group {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos de los inputs y selects */
+.view-issuer .form-group input,
+.view-issuer .form-group select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--color-primary-hover);
+    outline: none;
+}
+
+/* Focus de los inputs y selects */
+.view-issuer .form-group input:focus,
+.view-issuer .form-group select:focus {
+    border-color: var(--color-primary-hover);
+    box-shadow: 0 0 0 3px rgba(161, 126, 255, 0.20);
+    outline: none;
+}
+
+.view-issuer .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/*linea de separacion entre campos y botones*/
+.view-issuer .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 10px;
+    border-top: 1px solid var(--color-primary-hover-2);
+}
+
+/*boton guardar datos*/
+.view-issuer button {
+    border: none;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--color-card);
+    color: var(--color-text);
+    border: 2px solid var(--color-btn-hover);
+    cursor: pointer;
+}
+
+/*Hover del boton añadir cliente*/
+.view-issuer button:hover {
+    background-color: var(--color-btn-hover);
+}

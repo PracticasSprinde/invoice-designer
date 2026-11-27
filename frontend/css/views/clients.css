@@ -140,9 +140,11 @@
     background-color: var(--color-card);
 }
 
+/*boton cerrar formulario hover*/
 .view-clients .form-header button:hover {
+    color: var(--color-card);
     border-color: transparent;
-    background-color: var(--color-primary-hover-2);
+    background-color: var(--color-btn-edit-hover);
 }
 
 /*labels e inputs del formulario*/
@@ -188,34 +190,41 @@
 
 /*botones del formulario*/
 .view-clients .form-footer button {
-    padding: 10px;
-    font-size: 16px;
+    padding: 14px;
     border-radius: 10px;
-    border: 1px solid var(--color-primary-hover-2);
-    background-color: var(--color-text);
-    color: var(--color-btn-text);
 }
 
 /*hover boton cancel del formulario*/
 .view-clients .form-footer button.btn-cancel {
+    font-size: 13px;
+    font-style: italic;
+    padding: 10px 10px;
+    border: 1px solid var(--color-primary-hover-2);
+    color: var(--color-text);
     background-color: var(--color-gradient-end);
 }
 
 /*hover boton cancel del formulario*/
 .view-clients .form-footer button.btn-cancel:hover {
+    color: var(--color-card);
     border-color: transparent;
     background-color: var(--color-btn-delete-hover);
 }
 
 /* boton guardar del formulario*/
 .view-clients .form-footer button.btn-save {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: 2px solid var(--color-btn-hover);
+    color: var(--color-text);
     background-color: var(--color-card);
 }
 
 /*hover boton save del formulario*/
 .view-clients .form-footer button.btn-save:hover {
     border-color: transparent;
-    background-color: var(--color-btn-edit-hover);
+    background-color: var(--color-btn-hover);
 }
 
 /*fondo para el modal*/
