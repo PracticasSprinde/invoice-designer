@@ -1,0 +1,104 @@
+.view-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/*cabecera settings*/
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: transparent;
+    border-bottom: 3px solid var(--color-gradient-start);
+}
+
+/*titulo settings*/
+.view-settings h1 {
+    font-size: 30px;
+    color: var(--color-text);
+}
+
+/*fomulario*/
+.view-settings .form-settings {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 35px;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90%;
+    overflow-y: auto;
+    margin: 0 auto;
+    background-color: var(--color-gradient-end);
+}
+
+/* Estilos de los label */
+.view-settings .form-group label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Estilos de los parrafos */
+.view-settings .form-group p {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin: 5px 0 10px;
+}
+
+/* Estilos de los inputs y selects */
+.view-settings .form-group input,
+.view-settings .form-group select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--color-primary-hover);
+    outline: none;
+}
+
+/* Focus de los inputs y selects */
+.view-settings .form-group input:focus,
+.view-settings .form-group select:focus {
+    border-color: var(--color-primary-hover);
+    box-shadow: 0 0 0 3px rgba(161, 126, 255, 0.20);
+    outline: none;
+}
+
+.view-settings .form-group:first-child {
+    border-bottom: 1px solid var(--color-primary-hover-2);
+    margin-bottom: 10px;
+    padding-bottom: 25px;
+}
+
+.view-settings .form-group:last-child {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+/*linea de separacion entre tema y boton*/
+.view-settings .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px 10px 0;
+    border-top: 1px solid var(--color-primary-hover-2);
+}
+
+
+/*boton guardar datos*/
+.view-settings button {
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--color-card);
+    color: var(--color-text);
+    border: 2px solid var(--color-btn-hover);
+    cursor: pointer;
+}
+
+/*Hover del boton guardar*/
+.view-settings button:hover {
+    background-color: var(--color-btn-hover);
+}
